@@ -15,10 +15,33 @@ namespace Example.Business.Logic.Managers
             _stuffRepository = stuffRepositoy;
         }
 
-        public IEnumerable<Stuff> GetReversedStuff()
+        public IEnumerable<Stuff> GetStuff(string search = "")
         {
             var stuff = _stuffRepository.Get();
+
+            stuff = SearchStuff(stuff, search);
+
+            return stuff;
+        }
+
+        public IEnumerable<Stuff> GetReversedStuff(string search = "")
+        {
+            var stuff = _stuffRepository.Get();
+
+            stuff = SearchStuff(stuff, search);
+
             return stuff.Reverse();
+        }
+
+        private IEnumerable<Stuff> SearchStuff(IEnumerable<Stuff> stuff, string search)
+        {
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                search = search.ToLower();
+                stuff = stuff.Where(s => s.One.ToLower() == search || s.Two.ToLower() == search || s.Three.ToLower() == search);
+            }
+
+            return stuff;
         }
     }
 }

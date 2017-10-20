@@ -24,17 +24,19 @@ namespace Example
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/react").Include(
-                        "~/Scripts/App/Utils/ArrayUtils.js",
-                        "~/Scripts/App/Controls/Forms/Textbox.jsx",
-                        "~/Scripts/App/Controls/AddStuff.jsx",
-                        "~/Scripts/App/Controls/SearchBar.jsx",
-                        "~/Scripts/App/Controls/Stuff.jsx",
-                        "~/Scripts/App/Controls/ListOfStuff.jsx",
-                        "~/Scripts/App/Pages/ReactPage.jsx"));
+                        "~/Content/Javascript/Utils/Array.js",
+                        "~/Content/Javascript/Utils/Ajax.js",
+                        "~/Content/Javascript/Controls/Forms/Textbox.jsx",
+                        "~/Content/Javascript/Controls/ErrorMessage.jsx",
+                        "~/Content/Javascript/Controls/AddStuff.jsx",
+                        "~/Content/Javascript/Controls/SearchBar.jsx",
+                        "~/Content/Javascript/Controls/Stuff.jsx",
+                        "~/Content/Javascript/Controls/StuffList.jsx",
+                        "~/Content/Javascript/Pages/ReactPage.jsx"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/Css/bootstrap.css",
+                      "~/Content/Less/site.css"));
         }
     }
 }

@@ -258,21 +258,33 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Css\bootstrap.css" />
+    <Content Include="Content\Css\bootstrap.min.css" />
+    <Content Include="Content\Javascript\Utils\Ajax.js" />
+    <Content Include="Content\Less\Site.css">
+      <DependentUpon>Site.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\Site.min.css">
+      <DependentUpon>Site.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="Scripts\App\Controls\Forms\Textbox.jsx" />
-    <None Include="Scripts\App\Controls\ListOfStuff.jsx" />
-    <Content Include="Scripts\App\Controls\SearchBar.jsx" />
-    <None Include="Scripts\App\Pages\ReactPage.jsx" />
-    <None Include="Scripts\App\Controls\Stuff.jsx" />
+    <Content Include="Content\Javascript\Controls\Forms\Textbox.jsx" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="Content\Javascript\Controls\ErrorMessage.jsx" />
+    <None Include="Content\Javascript\Controls\StuffList.jsx" />
+    <Content Include="Content\Javascript\Controls\SearchBar.jsx" />
+    <None Include="Content\Javascript\Pages\ReactPage.jsx" />
+    <None Include="Content\Javascript\Controls\Stuff.jsx" />
     <Content Include="readme.txt" />
-    <None Include="Scripts\App\Controls\AddStuff.jsx" />
-    <Content Include="Scripts\App\Utils\ArrayUtils.js" />
+    <None Include="Content\Javascript\Controls\AddStuff.jsx" />
+    <Content Include="Content\Javascript\Utils\Array.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\Less\Site.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -301,7 +313,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\BaseApi\" />
     <Folder Include="Views\StuffApi\" />
   </ItemGroup>

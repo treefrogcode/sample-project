@@ -5,6 +5,7 @@ namespace Example.Business.Logic.Interfaces
 {
     public interface IStuffManager
     {
-        IEnumerable<Stuff> GetReversedStuff();
+        IEnumerable<Stuff> GetStuff(string search = "");
+        IEnumerable<Stuff> GetReversedStuff(string search = "");
     }
 }

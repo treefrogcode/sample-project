@@ -26,14 +26,7 @@ namespace Example.Business.API.Controllers
         [Route("get")]
         public IEnumerable<Stuff> Get(string search = "")
         {
-            var stuff = _stuffRepository.Get();
-
-            if (!string.IsNullOrWhiteSpace(search))
-            {
-                search = search.ToLower();
-                stuff = stuff.Where(s => s.One.ToLower() == search || s.Two.ToLower() == search || s.Three.ToLower() == search);
-            }
-
+            var stuff = _stuffManager.GetStuff(search);
             return stuff;
         }
 
@@ -42,12 +35,6 @@ namespace Example.Business.API.Controllers
         public IEnumerable<Stuff> GetReversedStuff(string search = "")
         {
             var stuff = _stuffManager.GetReversedStuff();
-
-            if (!string.IsNullOrWhiteSpace(search))
-            {
-                stuff = stuff.Where(s => s.One == search || s.Two == search || s.Three == search);
-            }
-
             return stuff;
         }
 

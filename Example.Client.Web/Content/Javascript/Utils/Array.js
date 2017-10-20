@@ -1,7 +1,7 @@
 ﻿var VDS = VDS || {};
 VDS.Utils = VDS.Utils || {};
 
-VDS.Utils.ArrayUtils = function () {
+VDS.Utils.Array = function () {
 
     var updateEntityItem = function (list, entity, property) {
         for (var i = 0; i < list.length; i++) {
