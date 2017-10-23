@@ -1,8 +1,10 @@
-﻿ReactPage = React.createClass({
+﻿class ReactPage extends React.Component {
 
-    getInitialState: function () {
+    constructor(props) {
+        super(props);
+
         var initialDataObj = JSON.parse(this.props.initialData);
-        return {
+        this.state = {
             list: initialDataObj.Results,
             page: initialDataObj.Paging.Page,
             pageSize: initialDataObj.Paging.PageSize,
@@ -12,8 +14,18 @@
             errorMessage: "",
             search: ""
         };
-    },
-    emptyData: function () {
+
+        this.reverseClick = this.reverseClick.bind(this);
+        this.addClick = this.addClick.bind(this);
+        this.editClick = this.editClick.bind(this);
+        this.deleteClick = this.deleteClick.bind(this);
+        this.cancelClick = this.cancelClick.bind(this);
+        this.saveClick = this.saveClick.bind(this);
+        this.onSearch = this.onSearch.bind(this);
+        this.gotoPage = this.gotoPage.bind(this);
+    }
+
+    emptyData() {
         var empty = {
             StuffId: 0,
             One: '',
@@ -23,25 +35,29 @@
         };
 
         return empty;
-    },
-    reverseClick: function() {
+    }
+
+    reverseClick() {
         this.setState({
             list: this.state.list.reverse()
         });
-    },
-    addClick: function () {
+    }
+
+    addClick() {
         this.setState({
             adding: true,
             data: this.emptyData()
         });
-    },
-    editClick: function(eventData) {
+    }
+
+    editClick(eventData) {
         this.setState({
             adding: true,
             data: eventData
         });
-    },
-    deleteClick: function (data) {
+    }
+
+    deleteClick(data) {
         VDS.Utils.Ajax.post('/api/stuff/delete', data,
         {
             onOK: (result) => {
@@ -52,14 +68,16 @@
                 });
             }
         });
-    },
-    cancelClick: function() {
+    }
+
+    cancelClick() {
         this.setState({
             adding: false,
             data: this.emptyData()
         });
-    },
-    saveClick: function(data) {
+    }
+
+    saveClick(data) {
         var add = data.StuffId === 0;
         var url =  add ? '/api/stuff/create' : '/api/stuff/update';
         VDS.Utils.Ajax.post(url, data,
@@ -82,8 +100,9 @@
                 });
             }
         });
-    },
-    onSearch: function (search, page) {
+    }
+
+    onSearch(search, page) {
         VDS.Utils.Ajax.post('/api/stuff/search?search=' + search + '&page=' + page, null,
         {
             onOK: (response) => {
@@ -96,11 +115,13 @@
                 });
             }
         });
-    },
-    gotoPage: function (page) {
+    }
+    
+    gotoPage(page) {
         this.onSearch(this.state.search, page);
-    },
-    render: function() {
+    }
+    
+    render() {
         return (
             <div className="row">
                 <SearchBar onSearch={this.onSearch} />
@@ -114,4 +135,4 @@
             </div>
         );
     }
-});
+};

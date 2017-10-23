@@ -1,38 +1,43 @@
-﻿var AddStuff = React.createClass({
+﻿class AddStuff extends React.Component {
 
-    getInitialState: function() {
-        return {
-            data: this.props.data,
-            inError: this.checkIfError(this.props.data)
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: props.data,
+            inError: this.checkIfError(props.data)
         };
-    },
 
-    componentWillReceiveProps: function (newProps) {
+        this.newValue = this.newValue.bind(this);
+        this.saveClick = this.saveClick.bind(this);
+        this.cancelClick = this.cancelClick.bind(this);
+    }
+
+    componentWillReceiveProps(newProps) {
         this.setState({
             data: newProps.data,
             inError: this.checkIfError(newProps.data)
         });
-    },
+    }
 
-    checkIfError: function (data) {
+    checkIfError(data) {
         return data.One === "" || data.Two === ""
-    },
+    }
 
-    newValue: function (value, ref) {
+    newValue(value, ref) {
         this.state.data[ref] = value;
         this.setState({ data: this.state.data, inError: this.checkIfError(this.state.data) });
-    },
+    }
 
-    saveClick: function(event) {
+    saveClick(event) {
         event.preventDefault();
         this.props.saveClick(this.state.data);
-    },
+    }
 
-    cancelClick: function() {
+    cancelClick() {
         this.props.cancelClick();
-    },
+    }
 
-    render: function() {
+    render() {
         return (
             <form onSubmit={this.saveClick}>
                 <div className="col-xs-12 mt20">
@@ -49,4 +54,4 @@
             </form>
         );
     }
-});
+};

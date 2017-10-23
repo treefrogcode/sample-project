@@ -1,28 +1,32 @@
-﻿ var SearchBar = React.createClass({
+﻿class SearchBar extends React.Component {
 
-     getInitialState: function () {
-         return {
-             search: ""
-         };
-     },
+    constructor(props) {
+        super(props);
 
-     changeText: function (event) {
+        this.state = {
+            search: ""
+        };
+
+        this.changeText = this.changeText.bind(this);
+    }
+
+     changeText(event) {
          var value = $.trim(event.target.value);
          this.setState({
              search: value
          });
-     },
+     }
 
-     onSearch: function (event) {
+     onSearch(event) {
          event.preventDefault();
          var search = this.state.search;
          this.props.onSearch(search);
          this.setState({
              search : ""
          });
-     },
+     }
 
-     render: function () {
+     render() {
          return (
             <div className="col-xs-12">
                 <form onSubmit={this.onSearch}>
@@ -41,4 +45,4 @@
             </div>
         );
      }
- });
+ };

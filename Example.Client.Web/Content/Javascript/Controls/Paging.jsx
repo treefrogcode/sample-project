@@ -1,14 +1,16 @@
-﻿var Paging = React.createClass({
+﻿class Paging extends React.Component {
 
-    getInitialState: function () {
-        return this.getPagingState(this.props);
-    },
+    constructor(props) {
+        super(props);
 
-    componentWillReceiveProps: function (newProps) {
+        this.state = this.getPagingState(props);
+    }
+
+    componentWillReceiveProps(newProps) {
         this.setState(this.getPagingState(newProps));
-    },
+    }
 
-    getPagingState: function (props) {
+    getPagingState(props) {
         var totalPages = Math.ceil(this.props.totalRecords / props.pageSize);
         var prevPage = props.page === 1 ? null : props.page - 1;
         var nextPage = props.page === totalPages ? null : props.page + 1;
@@ -24,13 +26,13 @@
             showStart: showStart,
             showEnd: showEnd
         };
-    },
+    }
 
-    gotoPage: function (page) {
+    gotoPage(page) {
         this.props.gotoPage(page);
-    },
+    }
 
-    render: function () {
+    render() {
 
         var pages = [];
         for (var i = 1; i <= this.state.totalPages; i++) {
@@ -55,4 +57,4 @@
             </div>
         );
     }
-});
+};

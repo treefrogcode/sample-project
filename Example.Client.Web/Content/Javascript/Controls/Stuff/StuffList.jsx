@@ -1,18 +1,26 @@
-﻿var StuffList = React.createClass({
+﻿class StuffList extends React.Component {
 
-    editClick: function (event) {
+    constructor(props) {
+        super(props);
+
+        this.editClick = this.editClick.bind(this);
+        this.deleteClick = this.deleteClick.bind(this);
+        this.gotoPage = this.gotoPage.bind(this);
+    }
+
+    editClick(event) {
         this.props.editClick(event);
-    },
+    }
 
-    deleteClick: function (event) {
+    deleteClick(event) {
         this.props.deleteClick(event);
-    },
+    }
 
-    gotoPage: function (page) {
+    gotoPage(page) {
         this.props.gotoPage(page);
-    },
+    }
 
-    render: function () {
+    render() {
         var nodes = this.props.data.map(function(item, index) {
             return (
                 <Stuff data={item} key={index} editClick={this.editClick} deleteClick={this.deleteClick} />
@@ -29,4 +37,4 @@
             </div>
         );
     }
-});
+};

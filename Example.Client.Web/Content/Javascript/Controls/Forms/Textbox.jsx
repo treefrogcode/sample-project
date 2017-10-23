@@ -1,17 +1,21 @@
-﻿ var Textbox = React.createClass({
+﻿ class Textbox extends React.Component {
 
-     getInitialState: function () {
-         return {
+     constructor(props) {
+         super(props);
+
+         this.state = {
              value: this.props.value,
              inError: false
          };
-     },
 
-     componentWillReceiveProps: function (newProps) {
+         this.changeText = this.changeText.bind(this);
+     }
+
+     componentWillReceiveProps(newProps) {
          this.setState({ value: newProps.value });
-     },
+     }
 
-     changeText: function (event) {
+     changeText(event) {
          var value = $.trim(event.target.value);
          this.setState({
              value: value,
@@ -21,9 +25,9 @@
          if (typeof this.props.newValue !== "undefined") {
              this.props.newValue(value, this.props.stateProp);
          }
-     },
+     }
 
-     render: function () {
+     render() {
          return (
                <div className="row">
                     <div className="col-xs-12 form-group">
@@ -34,4 +38,4 @@
                 </div>
         );
      }
- });
+ };

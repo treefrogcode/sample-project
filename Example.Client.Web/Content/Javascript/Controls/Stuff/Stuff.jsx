@@ -1,14 +1,18 @@
-﻿var Stuff = React.createClass({
+﻿class Stuff extends React.Component {
 
-    editClick: function (event) {
+    constructor(props) {
+        super(props);
+    }
+
+    editClick(event) {
         this.props.editClick(event);
-    },
+    }
 
-    deleteClick: function(event) {
+    deleteClick(event) {
         this.props.deleteClick(event);
-    },
+    }
 
-    render: function() {
+    render() {
         return (
             <div className="col-xs-4 col-md-3 col-lg-2">
                 <div className="row">
@@ -27,4 +31,4 @@
             </div>
         );
     }
-});
+};
