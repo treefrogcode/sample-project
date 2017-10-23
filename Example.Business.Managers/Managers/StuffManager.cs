@@ -1,4 +1,6 @@
 ﻿using Example.Business.Logic.Interfaces;
+using Example.Business.Logic.Utils;
+using Core.Common.Dtos;
 using Example.Business.Models.Entities;
 using Example.Data.Interfaces;
 using System.Collections.Generic;
@@ -15,22 +17,22 @@ namespace Example.Business.Logic.Managers
             _stuffRepository = stuffRepositoy;
         }
 
-        public IEnumerable<Stuff> GetStuff(string search = "")
+        public PagedResults<Stuff> GetStuff(string search = "", int page = 1, int pageSize = 4)
         {
             var stuff = _stuffRepository.Get();
 
             stuff = SearchStuff(stuff, search);
 
-            return stuff;
+            return CollectionUtils.PageResults(stuff, page, pageSize);
         }
 
-        public IEnumerable<Stuff> GetReversedStuff(string search = "")
+        public PagedResults<Stuff> GetReversedStuff(string search = "", int page = 1, int pageSize = 4)
         {
             var stuff = _stuffRepository.Get();
 
-            stuff = SearchStuff(stuff, search);
+            stuff = SearchStuff(stuff, search).Reverse();
 
-            return stuff.Reverse();
+            return CollectionUtils.PageResults(stuff, page, pageSize);
         }
 
         private IEnumerable<Stuff> SearchStuff(IEnumerable<Stuff> stuff, string search)

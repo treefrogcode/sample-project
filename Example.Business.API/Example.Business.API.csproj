@@ -213,6 +213,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
+      <Project>{04d1f929-afb8-4814-85df-46317225a636}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Example.Business.Models\Example.Business.Models.csproj">
       <Project>{e351055d-5480-4bf4-8374-b7ed6fabce3f}</Project>
       <Name>Example.Business.Models</Name>

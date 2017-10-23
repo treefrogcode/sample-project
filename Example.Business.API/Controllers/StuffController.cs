@@ -1,6 +1,7 @@
 ﻿using Example.Business.API.Attributes;
 using Example.Business.Logic.Managers;
 using Example.Business.Logic.Interfaces;
+using Core.Common.Dtos;
 using Example.Business.Models.Entities;
 using Example.Data.Interfaces;
 using System.Collections.Generic;
@@ -24,15 +25,15 @@ namespace Example.Business.API.Controllers
 
         [HttpGet]
         [Route("get")]
-        public IEnumerable<Stuff> Get(string search = "")
+        public PagedResults<Stuff> Get(string search = "", int page = 1, int pageSize = 4)
         {
-            var stuff = _stuffManager.GetStuff(search);
+            var stuff = _stuffManager.GetStuff(search, page, pageSize);
             return stuff;
         }
 
         [HttpGet]
         [Route("get-reverse")]
-        public IEnumerable<Stuff> GetReversedStuff(string search = "")
+        public PagedResults<Stuff> GetReversedStuff(string search = "", int page = 1, int pageSize = 4)
         {
             var stuff = _stuffManager.GetReversedStuff();
             return stuff;

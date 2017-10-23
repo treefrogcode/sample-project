@@ -28,10 +28,11 @@ namespace Example
                         "~/Content/Javascript/Utils/Ajax.js",
                         "~/Content/Javascript/Controls/Forms/Textbox.jsx",
                         "~/Content/Javascript/Controls/ErrorMessage.jsx",
-                        "~/Content/Javascript/Controls/AddStuff.jsx",
                         "~/Content/Javascript/Controls/SearchBar.jsx",
-                        "~/Content/Javascript/Controls/Stuff.jsx",
-                        "~/Content/Javascript/Controls/StuffList.jsx",
+                        "~/Content/Javascript/Controls/Paging.jsx",
+                        "~/Content/Javascript/Controls/Stuff/AddStuff.jsx",
+                        "~/Content/Javascript/Controls/Stuff/Stuff.jsx",
+                        "~/Content/Javascript/Controls/Stuff/StuffList.jsx",
                         "~/Content/Javascript/Pages/ReactPage.jsx"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

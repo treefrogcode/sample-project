@@ -1,4 +1,4 @@
-﻿var List = React.createClass({
+﻿var StuffList = React.createClass({
 
     editClick: function (event) {
         this.props.editClick(event);
@@ -6,6 +6,10 @@
 
     deleteClick: function (event) {
         this.props.deleteClick(event);
+    },
+
+    gotoPage: function (page) {
+        this.props.gotoPage(page);
     },
 
     render: function () {
@@ -21,6 +25,7 @@
                 <div className="row">
                     {nodes}
                 </div>
+                <Paging page={this.props.page} pageSize={this.props.pageSize} totalRecords={this.props.totalRecords} gotoPage={this.gotoPage}></Paging>
             </div>
         );
     }

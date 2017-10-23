@@ -1,4 +1,5 @@
-﻿using Example.Client.Models.Entities;
+﻿using Core.Common.Dtos;
+using Example.Client.Models.Entities;
 using Example.Client.Modles.Dtos;
 using Example.Client.Proxy.Interfaces;
 using System.Collections.Generic;
@@ -19,10 +20,10 @@ namespace Example.Client.Web.Controllers.Api
 
         [HttpPost]
         [Route("search")]
-        public async Task<JsonResult> Search(string search)
+        public async Task<JsonResult> Search(string search, int page = 1)
         {
-            var result = await _proxy.Get<List<Stuff>>($"/stuff/get?search={search}");
-            var apiResponse = new ApiResponse<List<Stuff>>(result);
+            var result = await _proxy.Get<PagedResults<Stuff>>($"/stuff/get?search={search}&page={page}");
+            var apiResponse = new ApiResponse<PagedResults<Stuff>>(result);
             return Json(apiResponse);
         }
 

@@ -1,11 +1,16 @@
 ﻿ReactPage = React.createClass({
 
-    getInitialState: function() {
+    getInitialState: function () {
+        var initialDataObj = JSON.parse(this.props.initialData);
         return {
-            list: JSON.parse(this.props.initialData),
+            list: initialDataObj.Results,
+            page: initialDataObj.Paging.Page,
+            pageSize: initialDataObj.Paging.PageSize,
+            totalRecords: initialDataObj.Paging.TotalRecords,
             adding: false,
             data: this.emptyData(),
-            errorMessage: ""
+            errorMessage: "",
+            search: ""
         };
     },
     emptyData: function () {
@@ -78,21 +83,28 @@
             }
         });
     },
-    onSearch: function (search) {
-        VDS.Utils.Ajax.post('/api/stuff/search?search=' + search, null,
+    onSearch: function (search, page) {
+        VDS.Utils.Ajax.post('/api/stuff/search?search=' + search + '&page=' + page, null,
         {
-            onOK: (result) => {
+            onOK: (response) => {
+                console.log(response);
                 this.setState({
-                    list: result
+                    list: response.Results,
+                    page: response.Paging.Page,
+                    pageSize: response.Paging.PageSize,
+                    totalRecords: response.Paging.TotalRecords
                 });
             }
         });
+    },
+    gotoPage: function (page) {
+        this.onSearch(this.state.search, page);
     },
     render: function() {
         return (
             <div className="row">
                 <SearchBar onSearch={this.onSearch} />
-                <List child="Stuff" title="List of Stuff" data={this.state.list} editClick={this.editClick} deleteClick={this.deleteClick} />
+                <StuffList child="Stuff" title="List of Stuff" data={this.state.list} page={this.state.page} pageSize={this.state.pageSize} totalRecords={this.state.totalRecords} gotoPage={this.gotoPage} editClick={this.editClick} deleteClick={this.deleteClick} />
                 <div className="col-xs-12 pb20">
                     <a className="btn btn-primary mr20" onClick={this.reverseClick}>Reverse list</a>
                     <a className="btn btn-warning" onClick={this.addClick}>Add New</a>
