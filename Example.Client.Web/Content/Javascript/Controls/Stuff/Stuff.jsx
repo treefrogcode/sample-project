@@ -12,6 +12,10 @@
         this.props.deleteClick(event);
     }
 
+    showModal(event) {
+        this.props.showModal(event);
+    }
+
     render() {
 
         var style = {
@@ -27,7 +31,10 @@
                             <div className="row">
                                 <div className="col-xs-9">{this.props.data.One}</div>
                                 <div className="col-xs-3 pull-right">
-                                    <span className="badge">{this.props.data.Categories.length}</span>
+                                    {this.props.data.Categories.length == 0 ?
+                                        <span title="No categories" className="badge">{this.props.data.Categories.length}</span> :
+                                        <a title="Click to view a list of categories" onClick={this.showModal.bind(this, this.props.data.Categories)} className="badge">{this.props.data.Categories.length}</a> 
+                                    }
                                 </div>
                             </div>
                         </div>

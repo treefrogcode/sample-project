@@ -11,7 +11,7 @@
          this.changeText = this.changeText.bind(this);
      }
 
-     componentWillReceiveProps(newProps) {
+     componentWillReceiveProps(newProps) { // inbuilt method
          this.setState({ value: newProps.value });
      }
 

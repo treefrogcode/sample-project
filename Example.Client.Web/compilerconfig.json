@@ -2,5 +2,17 @@
   {
     "outputFile": "Content/Less/Site.css",
     "inputFile": "Content/Less/Site.less"
+  },
+  {
+    "outputFile": "Content/Less/Layout.css",
+    "inputFile": "Content/Less/Layout.less"
+  },
+  {
+    "outputFile": "Content/Less/Stuff.css",
+    "inputFile": "Content/Less/Stuff.less"
+  },
+  {
+    "outputFile": "Content/Less/Variables.css",
+    "inputFile": "Content/Less/Variables.less"
   }
 ]

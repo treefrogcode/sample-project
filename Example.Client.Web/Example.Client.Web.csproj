@@ -271,6 +271,18 @@
     <Content Include="Content\Less\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
+    <Content Include="Content\Less\Stuff.css">
+      <DependentUpon>Stuff.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\Stuff.min.css">
+      <DependentUpon>Stuff.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\Variables.css">
+      <DependentUpon>Variables.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\Variables.min.css">
+      <DependentUpon>Variables.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Javascript\Controls\Forms\Textbox.jsx" />
@@ -281,6 +293,7 @@
     <Content Include="Content\Javascript\Controls\ErrorMessage.jsx" />
     <Content Include="Content\Javascript\Controls\Forms\Dropdown.jsx" />
     <Content Include="Content\Javascript\Controls\Forms\CheckList.jsx" />
+    <Content Include="Content\Javascript\Controls\Stuff\CategoryModal.jsx" />
     <None Include="Content\Javascript\Controls\Stuff\StuffList.jsx" />
     <Content Include="Content\Javascript\Controls\SearchBar.jsx" />
     <Content Include="Content\Javascript\Pages\ColourPage.jsx" />
@@ -293,10 +306,14 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\Less\Site.less" />
     <Content Include="Content\Javascript\Controls\Paging.jsx" />
+    <Content Include="Content\Less\Variables.less" />
+    <Content Include="Content\Less\Stuff.less" />
+    <Content Include="Content\Less\Layout.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.matchHeight.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

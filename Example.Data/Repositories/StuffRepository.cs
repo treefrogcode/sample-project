@@ -38,8 +38,10 @@ namespace Example.Data.Repositories
 
         protected override IEnumerable<Stuff> GetEntities(ExampleContext entityContext)
         {
-            var query =  from e in entityContext.StuffSet.Include("Colour").Include("Categories") 
-                        select e;
+            var query =  from e in entityContext.StuffSet
+                         .Include("Colour").Include("Categories")
+                         .OrderBy(x => x.One).ThenBy(x => x.Two).ThenBy(x => x.Three)
+                         select e;
 
             return query;
         }

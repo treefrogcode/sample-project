@@ -6,16 +6,23 @@
         this.editClick = this.editClick.bind(this);
         this.deleteClick = this.deleteClick.bind(this);
         this.gotoPage = this.gotoPage.bind(this);
+        this.showModal = this.showModal.bind(this);
 
         this.state = {
-            totalRecords: this.props.totalRecords
+            totalRecords: this.props.totalRecords,
+            modalCats: []
         };
     }
 
-    componentWillReceiveProps(newProps) {
+    componentWillReceiveProps(newProps) { // inbuilt method
         this.setState({
-            totalRecords: newProps.totalRecords
+            totalRecords: newProps.totalRecords,
+            modalCats: []
         });
+    }
+
+    componentDidMount() { // inbuilt method
+        $('.stuff-card').matchHeight();
     }
 
     editClick(event) {
@@ -30,10 +37,16 @@
         this.props.gotoPage(page);
     }
 
+    showModal(cats) {
+        this.setState({
+            modalCats: cats
+        }, () => { $("#categoryModal").modal(); });
+    }
+
     render() {
         var nodes = this.props.data.map(function(item, index) {
             return (
-                <Stuff data={item} key={index} editClick={this.editClick} deleteClick={this.deleteClick} />
+                <Stuff data={item} key={index} editClick={this.editClick} deleteClick={this.deleteClick} showModal={this.showModal} />
                 );
             }.bind(this));
 
@@ -44,6 +57,7 @@
                     {nodes}
                 </div>
                 <Paging page={this.props.page} pageSize={this.props.pageSize} totalRecords={this.state.totalRecords} gotoPage={this.gotoPage}></Paging>
+                <CategoryModal categories={this.state.modalCats}></CategoryModal>
             </div>
         );
     }

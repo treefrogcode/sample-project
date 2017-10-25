@@ -9,7 +9,8 @@ namespace Example
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.matchHeight.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -34,13 +35,16 @@ namespace Example
                         "~/Content/Javascript/Controls/Paging.jsx",
                         "~/Content/Javascript/Controls/Stuff/AddStuff.jsx",
                         "~/Content/Javascript/Controls/Stuff/Stuff.jsx",
+                        "~/Content/Javascript/Controls/Stuff/CategoryModal.jsx",
                         "~/Content/Javascript/Controls/Stuff/StuffList.jsx",
                         "~/Content/Javascript/Pages/ColourPage.jsx",
                         "~/Content/Javascript/Pages/StuffPage.jsx"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/Css/bootstrap.css",
-                      "~/Content/Less/site.css"));
+                      "~/Content/Less/site.css",
+                      "~/Content/Less/layout.css",
+                      "~/Content/Less/stuff.css"));
         }
     }
 }

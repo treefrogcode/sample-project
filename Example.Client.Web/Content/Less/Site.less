@@ -1,4 +1,6 @@
-﻿body {
+﻿@import "Variables.less";
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -23,21 +25,7 @@ textarea {
     max-width: 280px;
 }
 
-.stuff-card {
-    margin: 10px;
-    padding: 10px;
-    border: solid 1px #d0d0d0;
-    display: block;
-    transition-property: opacity, box-shadow;
-    transition: all,ease-in-out,.2s;
-    color: #000;
-    background-color: #ebebeb;
-}
-
-/*.stuff-card:hover {
-            box-shadow: 0 0 22px 2px rgba(0,0,0,.3);
-}*/
-
+/* set up standard margins */
 .mr10 {
     margin-right: 10px;
 }
@@ -50,20 +38,21 @@ textarea {
     margin-right: 20px;
 }
 
+/* set up error handing */
 input.error {
-    border: solid 1px #ff0000;
+    border: solid 1px @dark-red;
 }
 
 span.error {
-    color: #ff0000;
+    color: @dark-red;
     display: inline-block;
 }
 
 .error-message {
-    border-color: #ff0000;
-    background-color: lightcoral;
+    border-color: @dark-red;
+    background-color: @light-red;
     padding: 20px;
-    color:#fff;
+    color: @white;
 }
 
 option {
@@ -72,22 +61,32 @@ option {
     }
 }
 
+/* set up standard elements */
 .badge {
     border-radius: 50%;
-    background-color: #ff6a00;
+    background-color: @orange;
     color: #fff;
     font-weight: 700;
 }
 
 .check-list {
-    display:block;
+    display: block;
 
     input {
         height: 20px;
     }
 
     span {
-        margin-left: 20px; 
+        margin-left: 20px;
         font-weight: 500;
     }
 }
+
+.modal-footer {
+    margin-top: 0;
+}
+
+.modal-list {
+    display: block;
+}
+

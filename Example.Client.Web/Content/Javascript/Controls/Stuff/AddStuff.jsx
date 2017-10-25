@@ -13,7 +13,7 @@
         this.cancelClick = this.cancelClick.bind(this);
     }
 
-    componentWillReceiveProps(newProps) {
+    componentWillReceiveProps(newProps) { // inbuilt method
         this.setState({
             data: newProps.data,
             inError: this.checkIfError(newProps.data)
@@ -33,8 +33,6 @@
         else if (ref === "Categories") {
             this.state.data.Categories = VDS.Utils.Array.getAllEntityItems(this.props.categories, value, "EntityId");
         }
-
-        console.log("add", this.state.data);
 
         this.setState({ data: this.state.data, inError: this.checkIfError(this.state.data) });
     }

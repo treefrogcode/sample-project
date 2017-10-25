@@ -17,22 +17,30 @@ namespace Example.Business.Logic.Managers
             _stuffRepository = stuffRepositoy;
         }
 
-        public PagedResults<Stuff> GetStuff(string search = "", int page = 1, int pageSize = 4)
+        public PagedResults<Stuff> GetStuff(string search = "", int page = 1, int pageSize = 12)
         {
             var stuff = _stuffRepository.Get();
 
             stuff = SearchStuff(stuff, search);
 
-            return CollectionUtils.PageResults(stuff, page, pageSize);
+            var paged = CollectionUtils.PageResults(stuff, page, pageSize);
+
+            paged.Results = SortChildren(paged.Results);
+
+            return paged;
         }
 
-        public PagedResults<Stuff> GetReversedStuff(string search = "", int page = 1, int pageSize = 4)
+        public PagedResults<Stuff> GetReversedStuff(string search = "", int page = 1, int pageSize = 12)
         {
             var stuff = _stuffRepository.Get();
 
             stuff = SearchStuff(stuff, search).Reverse();
 
-            return CollectionUtils.PageResults(stuff, page, pageSize);
+            var paged = CollectionUtils.PageResults(stuff, page, pageSize);
+
+            paged.Results = SortChildren(paged.Results);
+
+            return paged;
         }
 
         private IEnumerable<Stuff> SearchStuff(IEnumerable<Stuff> stuff, string search)
@@ -44,6 +52,16 @@ namespace Example.Business.Logic.Managers
             }
 
             return stuff;
+        }
+
+        private IEnumerable<Stuff> SortChildren(IEnumerable<Stuff> stuffList)
+        {
+            foreach (var stuff in stuffList.ToList())
+            {
+                stuff.Categories = stuff.Categories.OrderBy(c => c.Name).ToList();
+            }
+
+            return stuffList;
         }
     }
 }

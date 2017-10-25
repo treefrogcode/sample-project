@@ -1,0 +1,15 @@
+﻿/*screen sizes*/
+/*colours*/
+.stuff-card {
+  margin: 10px;
+  padding: 10px;
+  border: solid 1px #a0a0a0;
+  display: block;
+  transition-property: opacity, box-shadow;
+  transition: all, ease-in-out, 0.2s;
+  color: #333;
+  background-color: #ebebeb;
+}
+/*.stuff-card:hover {
+            box-shadow: 0 0 22px 2px rgba(0,0,0,.3);
+}*/

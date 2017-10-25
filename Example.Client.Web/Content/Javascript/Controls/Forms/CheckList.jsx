@@ -13,7 +13,7 @@
         this.onChange = this.onChange.bind(this);
     }
 
-    componentWillReceiveProps(newProps) {
+    componentWillReceiveProps(newProps) { // inbuilt method
         this.setState({
             value: VDS.Utils.Array.turnIntoFlatStringArray(newProps.value, "EntityId"),
             data: newProps.data

@@ -6,7 +6,7 @@
         this.state = this.getPagingState(props);
     }
 
-    componentWillReceiveProps(newProps) {
+    componentWillReceiveProps(newProps) { // inbuilt method
         this.setState(this.getPagingState(newProps));
     }
 
