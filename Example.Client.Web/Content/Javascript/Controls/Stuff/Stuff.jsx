@@ -19,7 +19,7 @@
     render() {
 
         var style = {
-            backgroundColor: this.props.data.Colour == null ? "" : this.props.data.Colour.Name,
+            backgroundColor: this.props.data.Colour == null ? "" : this.props.data.Colour.EntityName,
             border: "solid 1px #a0a0a0"
         };
 

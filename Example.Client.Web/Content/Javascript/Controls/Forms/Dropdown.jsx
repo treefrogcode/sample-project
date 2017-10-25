@@ -29,7 +29,7 @@
 
      render() {
          const options = this.props.data.map((opt) => {
-             return <option key={opt.EntityId} value={opt.EntityId}>{opt.Name}</option>
+             return <option key={opt.EntityId} value={opt.EntityId}>{opt.EntityName}</option>
          });
 
          return (

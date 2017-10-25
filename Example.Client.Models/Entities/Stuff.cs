@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Example.Client.Models.Entities
 {
-    public class Stuff : BaseEntity, IIdentifiableEntity
+    public class Stuff : BaseEntity, IIdentifiableEntity, INamedEntity
     {
         public int StuffId { get; set; }
 
@@ -26,6 +26,12 @@ namespace Example.Client.Models.Entities
         {
             get { return StuffId; }
             set { StuffId = value; }
+        }
+
+        public string EntityName
+        {
+            get { return One; }
+            set { One = value; }
         }
     }
 }

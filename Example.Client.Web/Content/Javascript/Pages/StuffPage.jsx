@@ -16,7 +16,8 @@
             adding: false,
             data: this.emptyData(),
             errorMessage: "",
-            search: ""
+            search: "",
+            reverse: false
         };
 
         this.reverseClick = this.reverseClick.bind(this);
@@ -43,7 +44,9 @@
 
     reverseClick() {
         this.setState({
-            list: this.state.list.reverse()
+            reverse: !this.state.reverse
+        }, () => {
+            this.onSearch(this.state.search, 1);
         });
     }
 
@@ -58,6 +61,10 @@
         this.setState({
             adding: true,
             data: eventData
+        }, () => {
+            $('html, body').animate({
+                scrollTop: $("#stuff-form").offset().top
+            }, 800);
         });
     }
 
@@ -106,10 +113,14 @@
     }
 
     onSearch(search, page) {
-        VDS.Utils.Ajax.post('/api/stuff/search?search=' + search + '&page=' + page, null,
+
+        var url = this.state.reverse ? 'reverse-search' : 'search';
+
+        VDS.Utils.Ajax.post('/api/stuff/' + url + '?search=' + search + '&page=' + page, null,
         {
             onOK: (response) => {
                 this.setState({
+                    search: search,
                     list: response.Results,
                     page: response.Paging.Page,
                     pageSize: response.Paging.PageSize,
@@ -129,7 +140,7 @@
                 <SearchBar onSearch={this.onSearch} />
                 <StuffList colour="Stuff" title="List of Stuff" data={this.state.list} page={this.state.page} pageSize={this.state.pageSize} totalRecords={this.state.totalRecords} gotoPage={this.gotoPage} editClick={this.editClick} deleteClick={this.deleteClick} />
                 <div className="col-xs-12 pb20">
-                    <a className="btn btn-primary mr20" onClick={this.reverseClick}>Reverse list</a>
+                    <a className="btn btn-primary mr20" onClick={this.reverseClick }>{this.state.reverse ? "Sort A-Z" : "Sort Z-A"}</a>
                     <a className="btn btn-warning" onClick={this.addClick}>Add New</a>
                 </div>
                 {this.state.errorMessage.length > 0 ? <ErrorMessage message={this.state.errorMessage}></ErrorMessage> : null}

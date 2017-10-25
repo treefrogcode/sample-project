@@ -7,7 +7,7 @@
     render() {
 
         const cats = this.props.categories.map(function (cat) {
-            return <span className="modal-list" key={cat.EntityId}>{cat.Name}</span>
+            return <span className="modal-list" key={cat.EntityId }>{cat.EntityName}</span>
         });
 
         return (

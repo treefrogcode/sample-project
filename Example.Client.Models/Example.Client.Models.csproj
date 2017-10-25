@@ -112,6 +112,7 @@
     <Compile Include="Entities\Colour.cs" />
     <Compile Include="Entities\Stuff.cs" />
     <Compile Include="Entities\Token.cs" />
+    <Compile Include="Interfaces\INamedEntity.cs" />
     <Compile Include="Interfaces\IIdentifiableEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

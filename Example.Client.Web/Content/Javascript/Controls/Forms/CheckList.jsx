@@ -44,7 +44,7 @@
                 <div key={opt.EntityId} className="checkbox">
                     <label>
                         <input type="checkbox" checked={checked} value={opt.EntityId} onChange={this.onChange } />
-                        <span>{opt.Name}</span>
+                        <span>{opt.EntityName}</span>
                     </label>
                 </div>
             );

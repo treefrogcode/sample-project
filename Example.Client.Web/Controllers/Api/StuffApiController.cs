@@ -32,6 +32,16 @@ namespace Example.Client.Web.Controllers.Api
         }
 
         [HttpPost]
+        [Route("reverse-search")]
+        public async Task<JsonResult> ReverseSearch(string search, int page = 1, int pageSize = 12)
+        {
+            var result = await _proxy.Get<PagedResults<Stuff>>($"/{_apiPath}/get-reverse?search={search}&page={page}&pagesize={pageSize}");
+            var apiResponse = new ApiResponse<PagedResults<Stuff>>(result);
+            return Json(apiResponse);
+
+        }
+
+        [HttpPost]
         [Route("create")]
         public async Task<JsonResult> Create(Stuff newItem)
         {

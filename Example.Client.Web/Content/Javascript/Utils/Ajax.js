@@ -3,7 +3,7 @@ VDS.Utils = VDS.Utils || {};
 
 VDS.Utils.Ajax = function () {
 
-    //supports onOK, onInvalid, onError, onOther
+    //supports methods { onOK, onInvalid, onError, onOther }
 
     var post = function (url, data, methods) {
         $.ajax({

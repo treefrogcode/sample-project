@@ -48,7 +48,7 @@
 
     render() {
         return (
-            <form onSubmit={this.saveClick}>
+            <form onSubmit={this.saveClick} id="stuff-form">
                 <div className="col-xs-12 mt20">
                     <Dropdown label="Colour" data={this.props.colours} stateProp="ColourId" value={this.state.data.ColourId} newValue={this.newValue} />
                     <Textbox label="One" stateProp="One" value={this.state.data.One} newValue={this.newValue} mandatory="true" />

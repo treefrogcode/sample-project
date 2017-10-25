@@ -36,7 +36,7 @@ namespace Example.Business.API.Controllers
         [Route("get-reverse")]
         public PagedResults<Stuff> GetReversedStuff(string search = "", int page = 1, int pageSize = 0)
         {
-            var stuff = _stuffManager.GetReversedStuff();
+            var stuff = _stuffManager.GetReversedStuff(search, page, pageSize);
             return stuff;
         }
 

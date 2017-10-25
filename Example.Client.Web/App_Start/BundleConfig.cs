@@ -24,21 +24,25 @@ namespace Example
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/react").Include(
-                        "~/Content/Javascript/Utils/Array.js",
-                        "~/Content/Javascript/Utils/Ajax.js",
-                        "~/Content/Javascript/Controls/Forms/CheckList.jsx",
-                        "~/Content/Javascript/Controls/Forms/Textbox.jsx",
-                        "~/Content/Javascript/Controls/Forms/Dropdown.jsx",
-                        "~/Content/Javascript/Controls/ErrorMessage.jsx",
-                        "~/Content/Javascript/Controls/SearchBar.jsx",
-                        "~/Content/Javascript/Controls/Paging.jsx",
-                        "~/Content/Javascript/Controls/Stuff/AddStuff.jsx",
-                        "~/Content/Javascript/Controls/Stuff/Stuff.jsx",
-                        "~/Content/Javascript/Controls/Stuff/CategoryModal.jsx",
-                        "~/Content/Javascript/Controls/Stuff/StuffList.jsx",
-                        "~/Content/Javascript/Pages/ColourPage.jsx",
-                        "~/Content/Javascript/Pages/StuffPage.jsx"));
+            bundles.Add(new ScriptBundle("~/bundles/react")
+                .IncludeDirectory("~/Content/Javascript/", "*.js", true)
+                .IncludeDirectory("~/Content/Javascript/", "*.jsx", true));
+
+            //bundles.Add(new ScriptBundle("~/bundles/react").Include(
+                        //"~/Content/Javascript/Utils/Array.js",
+                        //"~/Content/Javascript/Utils/Ajax.js",
+                        //"~/Content/Javascript/Controls/Forms/CheckList.jsx",
+                        //"~/Content/Javascript/Controls/Forms/Textbox.jsx",
+                        //"~/Content/Javascript/Controls/Forms/Dropdown.jsx",
+                        //"~/Content/Javascript/Controls/ErrorMessage.jsx",
+                        //"~/Content/Javascript/Controls/SearchBar.jsx",
+                        //"~/Content/Javascript/Controls/Paging.jsx",
+                        //"~/Content/Javascript/Controls/Stuff/AddStuff.jsx",
+                        //"~/Content/Javascript/Controls/Stuff/Stuff.jsx",
+                        //"~/Content/Javascript/Controls/Stuff/CategoryModal.jsx",
+                        //"~/Content/Javascript/Controls/Stuff/StuffList.jsx",
+                        //"~/Content/Javascript/Pages/ColourPage.jsx",
+                        //"~/Content/Javascript/Pages/StuffPage.jsx"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/Css/bootstrap.css",
