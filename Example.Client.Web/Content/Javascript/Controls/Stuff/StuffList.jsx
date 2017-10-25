@@ -6,6 +6,16 @@
         this.editClick = this.editClick.bind(this);
         this.deleteClick = this.deleteClick.bind(this);
         this.gotoPage = this.gotoPage.bind(this);
+
+        this.state = {
+            totalRecords: this.props.totalRecords
+        };
+    }
+
+    componentWillReceiveProps(newProps) {
+        this.setState({
+            totalRecords: newProps.totalRecords
+        });
     }
 
     editClick(event) {
@@ -33,7 +43,7 @@
                 <div className="row">
                     {nodes}
                 </div>
-                <Paging page={this.props.page} pageSize={this.props.pageSize} totalRecords={this.props.totalRecords} gotoPage={this.gotoPage}></Paging>
+                <Paging page={this.props.page} pageSize={this.props.pageSize} totalRecords={this.state.totalRecords} gotoPage={this.gotoPage}></Paging>
             </div>
         );
     }

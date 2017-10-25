@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Example.Data.Repositories
 {
-    public abstract class BaseRepository<T> : BaseContextRepository<T, StuffContext>
+    public abstract class BaseRepository<T> : BaseContextRepository<T, ExampleContext>
         where T : class, IIdentifiableEntity, new()
     {
     }

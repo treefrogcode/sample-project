@@ -20,7 +20,7 @@ namespace Example.Business.API.Attributes
             {
                 // In .net core this can be injected and this becomes a service filter
                 // having this here is awful I know but as it's just a demo.....
-                using (var dbContext = new StuffContext())
+                using (var dbContext = new ExampleContext())
                 {
                     var token = dbContext.TokenSet.Where(t => t.Guid.ToString() == header.Value.FirstOrDefault().ToString()).FirstOrDefault();
                     if (token != null)

@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace Example.Business.Models.Entities
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
     }
 }

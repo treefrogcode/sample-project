@@ -18,9 +18,13 @@ namespace Example.Business.API
             // it is NOT necessary to register your controllers
 
             container.RegisterType<IStuffRepository, StuffRepository>();
+            container.RegisterType<IColourRepository, ColourRepository>();
+            container.RegisterType<ICategoryRepository, CategoryRepository>();
             container.RegisterType<ITokenRepository, TokenRepository>();
 
             container.RegisterType<IStuffManager, StuffManager>();
+            container.RegisterType<IColourManager, ColourManager>();
+            container.RegisterType<ICategoryManager, CategoryManager>();
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

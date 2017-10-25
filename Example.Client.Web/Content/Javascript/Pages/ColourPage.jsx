@@ -61,10 +61,9 @@
         VDS.Utils.Ajax.post('/api/stuff/delete', data,
         {
             onOK: (result) => {
-                VDS.Utils.Array.removeEntityItem(this.state.list, result, "StuffId");
+                this.onSearch(this.state.search, this.state.page);
                 this.setState({
                     adding: false,
-                    list: this.state.list
                 });
             }
         });
@@ -84,7 +83,7 @@
         {
             onOK: (result) => {
                 if (add) {
-                    this.state.list.push(result);
+                    this.onSearch(this.state.search, this.state.page);
                 }
                 else {
                     VDS.Utils.Array.updateEntityItem(this.state.list, result, "StuffId");
@@ -106,7 +105,6 @@
         VDS.Utils.Ajax.post('/api/stuff/search?search=' + search + '&page=' + page, null,
         {
             onOK: (response) => {
-                console.log(response);
                 this.setState({
                     list: response.Results,
                     page: response.Paging.Page,
@@ -125,7 +123,7 @@
         return (
             <div className="row">
                 <SearchBar onSearch={this.onSearch} />
-                <StuffList child="Stuff" title="List of Stuff" data={this.state.list} page={this.state.page} pageSize={this.state.pageSize} totalRecords={this.state.totalRecords} gotoPage={this.gotoPage} editClick={this.editClick} deleteClick={this.deleteClick} />
+                <StuffList colour="Stuff" title="List of Stuff" data={this.state.list} page={this.state.page} pageSize={this.state.pageSize} totalRecords={this.state.totalRecords} gotoPage={this.gotoPage} editClick={this.editClick} deleteClick={this.deleteClick} />
                 <div className="col-xs-12 pb20">
                     <a className="btn btn-primary mr20" onClick={this.reverseClick}>Reverse list</a>
                     <a className="btn btn-warning" onClick={this.addClick}>Add New</a>

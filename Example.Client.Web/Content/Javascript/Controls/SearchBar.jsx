@@ -8,6 +8,7 @@
         };
 
         this.changeText = this.changeText.bind(this);
+        this.onSearch = this.onSearch.bind(this);
     }
 
      changeText(event) {

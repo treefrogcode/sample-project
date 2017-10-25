@@ -1,6 +1,6 @@
 ﻿namespace Example.Client.Models.Entities
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
     }
 }

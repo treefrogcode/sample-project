@@ -8,18 +8,18 @@ namespace Example.Data.Repositories
 {
     public class TokenRepository : BaseRepository<Token>, ITokenRepository
     {
-        protected override Token AddEntity(StuffContext entityContext, Token entity)
+        protected override Token AddEntity(ExampleContext entityContext, Token entity)
         {
             return entityContext.TokenSet.Add(entity);
         }
 
-        protected override IEnumerable<Token> GetEntities(StuffContext entityContext)
+        protected override IEnumerable<Token> GetEntities(ExampleContext entityContext)
         {
             return from e in entityContext.TokenSet
                    select e;
         }
 
-        protected override Token GetEntity(StuffContext entityContext, int id)
+        protected override Token GetEntity(ExampleContext entityContext, int id)
         {
             var query = (from e in entityContext.TokenSet
                          where e.TokenId == id
@@ -30,7 +30,7 @@ namespace Example.Data.Repositories
             return results;
         }
 
-        protected override Token UpdateEntity(StuffContext entityContext, Token entity)
+        protected override Token UpdateEntity(ExampleContext entityContext, Token entity)
         {
             return (from e in entityContext.TokenSet
                     where e.TokenId == entity.TokenId

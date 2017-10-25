@@ -1,6 +1,8 @@
 ﻿using Core.Common.Dtos;
 using Example.Client.Models.Entities;
 using Example.Client.Proxy.Interfaces;
+using Example.Client.Web.ViewModels;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -10,17 +12,10 @@ namespace Example.Client.Web.Controllers
     public class HomeController : BaseController
     {
         private readonly IClientProxy _proxy;
+
         public HomeController(IClientProxy proxy)
         {
             _proxy = proxy;
-        }
-
-        [Route("")]
-        [Route("get")]
-        public async Task<ActionResult> Get()
-        {
-            var response = await _proxy.Get<PagedResults<Stuff>>("/stuff/get");
-            return View("index", response.Results);
         }
 
         [Route("reverse")]
@@ -30,11 +25,28 @@ namespace Example.Client.Web.Controllers
             return View("index", response.Results);
         }
 
+        [Route("")]
         [Route("react")]
-        public async Task<ActionResult> React()
+        [Route("stuff")]
+        public async Task<ActionResult> Stuff()
         {
-            var response = await _proxy.GetAsJson("/stuff/get");
-            return View("react", null, response);
+            var pagedResults = await _proxy.Get<PagedResults<Stuff>>("/stuff/get?pagesize=12");
+            var colours = await _proxy.Get<PagedResults<Colour>>("/colour/get");
+            var categories = await _proxy.Get<PagedResults<Category>>("/category/get");
+
+            var model = new StuffViewModel();
+            model.PagedResults = pagedResults;
+            model.Colours = colours.Results;
+            model.Categories = categories.Results;
+
+            return View("stuff", null, JsonConvert.SerializeObject(model));
+        }
+
+        [Route("colour")]
+        public async Task<ActionResult> Colour()
+        {
+            var response = await _proxy.GetAsJson("/colour/get");
+            return View("colour", null, response);
         }
     }
 }

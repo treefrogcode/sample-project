@@ -25,15 +25,16 @@ namespace Example.Business.API.Controllers
 
         [HttpGet]
         [Route("get")]
-        public PagedResults<Stuff> Get(string search = "", int page = 1, int pageSize = 4)
+        public PagedResults<Stuff> Get(string search = "", int page = 1, int pageSize = 0)
         {
+
             var stuff = _stuffManager.GetStuff(search, page, pageSize);
             return stuff;
         }
 
         [HttpGet]
         [Route("get-reverse")]
-        public PagedResults<Stuff> GetReversedStuff(string search = "", int page = 1, int pageSize = 4)
+        public PagedResults<Stuff> GetReversedStuff(string search = "", int page = 1, int pageSize = 0)
         {
             var stuff = _stuffManager.GetReversedStuff();
             return stuff;

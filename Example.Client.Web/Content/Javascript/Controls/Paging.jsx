@@ -11,11 +11,11 @@
     }
 
     getPagingState(props) {
-        var totalPages = Math.ceil(this.props.totalRecords / props.pageSize);
-        var prevPage = props.page === 1 ? null : props.page - 1;
-        var nextPage = props.page === totalPages ? null : props.page + 1;
-        var showStart = ((props.page - 1) * props.pageSize) + 1;
-        var showEnd = showStart + props.pageSize > this.props.totalRecords ? this.props.totalRecords : showStart + props.pageSize - 1;
+        let totalPages = Math.ceil(props.totalRecords / props.pageSize);
+        let prevPage = props.page === 1 ? null : props.page - 1;
+        let nextPage = props.page === totalPages ? null : props.page + 1;
+        let showStart = props.totalRecords === 0 ? 0 : ((props.page - 1) * props.pageSize) + 1;
+        let showEnd = showStart + props.pageSize > props.totalRecords ? props.totalRecords : showStart + props.pageSize - 1;
         return {
             page: props.page,
             totalPages: totalPages,

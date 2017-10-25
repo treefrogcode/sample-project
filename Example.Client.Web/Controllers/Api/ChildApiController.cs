@@ -9,11 +9,11 @@ using System.Web.Mvc;
 
 namespace Example.Client.Web.Controllers.Api
 {
-    [RoutePrefix("api/stuff")]
-    public class StuffApiController : BaseApiController<Stuff>
+    [RoutePrefix("api/colour")]
+    public class ColourApiController : BaseApiController<Colour>
     {
-        public StuffApiController(IClientProxy proxy)
-            : base("stuff", proxy)
+        public ColourApiController(IClientProxy proxy)
+            :base("colour", proxy)
         {
         }
 
@@ -33,23 +33,23 @@ namespace Example.Client.Web.Controllers.Api
 
         [HttpPost]
         [Route("create")]
-        public async Task<JsonResult> Create(Stuff newItem)
+        public async Task<JsonResult> Create(Colour newItem)
         {
             return await BaseCreate(newItem);
         }
 
         [HttpPost]
         [Route("update")]
-        public async Task<JsonResult> Update(Stuff updatedItem)
+        public async Task<JsonResult> Update(Colour updatedItem)
         {
-            return await BaseUpdate(updatedItem);
+            return await BaseCreate(updatedItem);
         }
 
         [HttpPost]
         [Route("delete")]
-        public async Task<JsonResult> Delete(Stuff deletedItem)
+        public async Task<JsonResult> Delete(Colour deletedItem)
         {
-            return await BaseDelete(deletedItem);
+            return await BaseCreate(deletedItem);
         }
     }
 }

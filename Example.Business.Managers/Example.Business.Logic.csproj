@@ -106,6 +106,10 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ICategoryManager.cs" />
+    <Compile Include="Interfaces\IColourManager.cs" />
+    <Compile Include="Managers\CategoryManager.cs" />
+    <Compile Include="Managers\ColourManager.cs" />
     <Compile Include="Utils\CollectionUtils.cs" />
     <Compile Include="Interfaces\IStuffManager.cs" />
     <Compile Include="Managers\StuffManager.cs" />

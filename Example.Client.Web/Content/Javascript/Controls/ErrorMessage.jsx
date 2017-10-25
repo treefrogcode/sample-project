@@ -1,4 +1,4 @@
-﻿class ErrorMessage extends React.Compoment{
+﻿class ErrorMessage extends React.Component {
 
     constructor(props) {
         super(props);

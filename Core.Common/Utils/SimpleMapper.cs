@@ -32,5 +32,4 @@ namespace Core.Common.Utils.Utils
             }
         }
     }
-
 }

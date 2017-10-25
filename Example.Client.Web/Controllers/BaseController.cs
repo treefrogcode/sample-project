@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Example.Client.Web.Controllers
 {
-    public class BaseController : Controller
+    public abstract class BaseController : Controller
     {
     }
 }
