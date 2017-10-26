@@ -1,5 +1,6 @@
 ﻿using System;
 using Example.Client.Models.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace Example.Client.Models.Entities
 {
@@ -7,6 +8,7 @@ namespace Example.Client.Models.Entities
     {
         public int CategoryId { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public int EntityId

@@ -298,6 +298,7 @@
     <Content Include="Content\Javascript\Controls\Forms\CheckList.jsx" />
     <Content Include="Content\Javascript\Controls\Stuff\CategoryModal.jsx" />
     <Content Include="Content\Javascript\Controls\Admin\AdminEntityList.jsx" />
+    <Content Include="Content\Javascript\Controls\Forms\Button.jsx" />
     <None Include="Content\Javascript\Controls\Stuff\StuffList.jsx" />
     <Content Include="Content\Javascript\Controls\SearchBar.jsx" />
     <Content Include="Content\Javascript\Pages\AdminPage.jsx" />

@@ -9,6 +9,14 @@ body {
   padding-left: 15px;
   padding-right: 15px;
 }
+/* Override bootstraps inline form wrapping on smaller devices*/
+.form-inline .form-control {
+  width: 70%;
+  display: inline-block;
+}
+.form-inline .form-group {
+  display: inline-block;
+}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -76,4 +84,15 @@ option.grey {
 }
 .add-row {
   background-color: #fff;
+}
+button i.fa {
+  display: inline;
+}
+button span {
+  margin-left: 10px;
+}
+@media (max-width: 767px) {
+  button span {
+    display: none;
+  }
 }

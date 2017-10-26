@@ -39,7 +39,7 @@
                     <div className="row form-inline">
                         <div className="col-xs-12 form-group">
                             <input type="text" value={this.state.search} maxLength="100" className="form-control mr10" onChange={this.changeText} />
-                            <button type="submit" className="btn btn-Success search">Search</button>
+                            <Button type="submit" label="Search" icon="search" title="Search" class="secondary" />
                         </div>
                     </div>
                 </form>

@@ -27,6 +27,12 @@
         });
     }
 
+    componentDidUpdate() { // inbuit method
+        if (this.state.editId >= 0) {
+            $('#input_' + this.state.editId).focus();
+        }
+    }
+
     addClick(event) {
         this.reset(true);
     }
@@ -90,22 +96,22 @@
                     <td>
                         {
                         this.state.editId === item.EntityId ?
-                        <input type="text" value={this.state.editValue} onChange={this.onChange} onKeyDown={(event) => this.onKeyDown(item, event)} />
+                        <input id={"input_" + item.EntityId} type="text" value={this.state.editValue} onChange={this.onChange} onKeyDown={(event) => this.onKeyDown(item, event)} />
                         :
                         <span>{item.EntityName}</span>
                         }
                     </td>
-                    <td width="30%" className="text-right">
+                    <td width="40%" className="text-right">
                         {
-                            this.state.editId === item.EntityId ?
+                        this.state.editId === item.EntityId ?
                                 <span>
-                                    <a className="btn btn-sm btn-success mr20" onClick={this.saveClick.bind(this, item)}>Save</a>
-                                    <a className="btn btn-sm btn-danger" onClick={this.cancelClick}>Cancel</a>
+                                    <Button disabled={this.state.editValue === ''} label="Save" icon="save" title="Save" class="success mr10" onClick={this.saveClick.bind(this, item)} />
+                                    <Button label="Cancel" icon="remove" title="Cancel" class="danger" onClick={this.cancelClick} />
                                 </span>
-                            :
+                        :
                                 <span>
-                                    <a className="btn btn-sm btn-primary mr20" onClick={this.editClick.bind(this, item)}>Edit</a>
-                                    <a className="btn btn-sm btn-danger" onClick={this.deleteClick.bind(this, item)}>Delete</a>
+                                    <Button label="Edit" icon="edit" title="Edit" class="primary mr10" onClick={this.editClick.bind(this, item)} />
+                                    <Button label="Delete" icon="trash" title="Delete" class="danger" onClick={this.deleteClick.bind(this, item)} />
                                 </span>
                         }
                     </td>
@@ -115,7 +121,7 @@
 
         return (
             <div className="col-xs-12">
-                <h3>{this.props.title}</h3>
+                <h3>{this.props.type + " list"}</h3>
                 {this.state.errorMessage.length > 0 ? <ErrorMessage message={this.state.errorMessage}></ErrorMessage> : null}
                 <table className="table table-striped">
                     <thead className="thead-dark">
@@ -123,7 +129,7 @@
                             <th>Id</th>
                             <th>Name</th>
                             <th className="text-right">
-                                <button className="btn btn-success" onClick={this.addClick}>Add New</button>
+                                <Button label="Add new" icon="plus" title={"Add new " + this.props.type} class="success" onClick={this.addClick} />
                             </th>
                         </tr>
                     </thead>
@@ -133,12 +139,12 @@
                         <tr className="add-row">
                             <td width="10%">-</td>
                             <td>
-                                <input type="text" value={this.state.editValue} onChange={this.onChange} onKeyDown={(event) => this.onKeyDown(null, event)} />
+                                <input id="input_0" type="text" value={this.state.editValue} onChange={this.onChange} onKeyDown={(event) => this.onKeyDown(null, event)} />
                             </td>
                             <td width="30%" className="text-right">
                                 <span>
-                                    <a className="btn btn-sm btn-success mr20" onClick={this.saveClick.bind(this, null)}>Save</a>
-                                    <a className="btn btn-sm btn-danger" onClick={this.cancelClick}>Cancel</a>
+                                    <Button disabled={this.state.editValue === ''} label="Save" icon="save" title="Save" class="success mr10" onClick={this.saveClick.bind(this, null)} />
+                                    <Button label="Cancel" icon="remove" title="Cancel" class="danger" onClick={this.cancelClick} />
                                 </span>
                             </td>
                         </tr>

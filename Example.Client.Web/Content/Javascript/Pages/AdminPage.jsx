@@ -75,7 +75,8 @@
                     list: response.Results,
                     page: response.Paging.Page,
                     pageSize: response.Paging.PageSize,
-                    totalRecords: response.Paging.TotalRecords
+                    totalRecords: response.Paging.TotalRecords,
+                    errorMessage: ''
                 });
             }
         });
@@ -83,16 +84,13 @@
     
     gotoPage(page) {
         this.onSearch(this.state.search, page);
-        this.setState({
-            errorMessage: ''
-        });
     }
     
     render() {
         return (
             <div className="row">
                 <SearchBar title={this.props.type + " search"} onSearch={this.onSearch} />
-                <AdminEntityList errorMessage={this.state.errorMessage} type={this.props.type} title={this.props.type + " list"} data={this.state.list} page={this.state.page} pageSize={this.state.pageSize} totalRecords={this.state.totalRecords} gotoPage={this.gotoPage} saveClick={this.saveClick} deleteClick={this.deleteClick} />
+                <AdminEntityList errorMessage={this.state.errorMessage} type={this.props.type} type={this.props.type} data={this.state.list} page={this.state.page} pageSize={this.state.pageSize} totalRecords={this.state.totalRecords} gotoPage={this.gotoPage} saveClick={this.saveClick} deleteClick={this.deleteClick} />
             </div>
         );
     }

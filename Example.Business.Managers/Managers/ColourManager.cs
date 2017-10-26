@@ -31,7 +31,7 @@ namespace Example.Business.Logic.Managers
             if (!string.IsNullOrWhiteSpace(search))
             {
                 search = search.ToLower();
-                colours = colours.Where(s => s.Name.ToLower() == search);
+                colours = colours.Where(s => s.Name.ToLower().IndexOf(search) >= 0);
             }
 
             return colours;
