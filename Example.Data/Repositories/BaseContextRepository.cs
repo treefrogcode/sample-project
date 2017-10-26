@@ -22,32 +22,65 @@ namespace Example.Data.Repositories
 
         protected abstract T GetEntity(U entityContext, int id);
 
+        protected virtual bool CheckNotInUse(U entityContext, int id)
+        {
+            return true;
+        }
+
+        protected virtual bool CheckNotDuplicate(U entityContext, T entity)
+        {
+            return true;
+        }
+
         public T Add(T entity)
         {
             using (U entityContext = new U())
             {
-                T addedEntity = AddEntity(entityContext, entity);
-                entityContext.SaveChanges();
-                return addedEntity;
+                if (CheckNotDuplicate(entityContext, entity))
+                {
+                    T addedEntity = AddEntity(entityContext, entity);
+                    entityContext.SaveChanges();
+                    return addedEntity;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
-        public void Remove(T entity)
+        public bool Remove(T entity)
         {
             using (U entityContext = new U())
             {
-                entityContext.Entry<T>(entity).State = EntityState.Deleted;
-                entityContext.SaveChanges();
+                if (CheckNotInUse(entityContext, entity.EntityId))
+                {
+                    entityContext.Entry<T>(entity).State = EntityState.Deleted;
+                    entityContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
-        public void Remove(int id)
+        public bool Remove(int id)
         {
             using (U entityContext = new U())
             {
-                T entity = GetEntity(entityContext, id);
-                entityContext.Entry<T>(entity).State = EntityState.Deleted;
-                entityContext.SaveChanges();
+                if (CheckNotInUse(entityContext, id))
+                {
+                    T entity = GetEntity(entityContext, id);
+                    entityContext.Entry<T>(entity).State = EntityState.Deleted;
+                    entityContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
@@ -55,12 +88,17 @@ namespace Example.Data.Repositories
         {
             using (U entityContext = new U())
             {
-                T existingEntity = UpdateEntity(entityContext, entity);
-
-                SimpleMapper.PropertyMap(entity, existingEntity);
-
-                entityContext.SaveChanges();
-                return existingEntity;
+                if (CheckNotDuplicate(entityContext, entity))
+                {
+                    T existingEntity = UpdateEntity(entityContext, entity);
+                    SimpleMapper.PropertyMap(entity, existingEntity);
+                    entityContext.SaveChanges();
+                    return existingEntity;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 

@@ -9,6 +9,11 @@ namespace Example.Data.Repositories
 {
     public class ColourRepository : BaseRepository<Colour>, IColourRepository
     {
+        protected bool InUse(ExampleContext entityContext, Colour entity)
+        {
+            return entityContext.StuffSet.Any(s => s.ColourId == entity.ColourId);
+        }
+
         protected override Colour AddEntity(ExampleContext entityContext, Colour entity)
         {
             return entityContext.ColourSet.Add(entity);
@@ -37,6 +42,16 @@ namespace Example.Data.Repositories
             return (from e in entityContext.ColourSet
                     where e.ColourId == entity.ColourId
                     select e).FirstOrDefault();
+        }
+
+        protected override bool CheckNotDuplicate(ExampleContext entityContext, Colour entity)
+        {
+            return !entityContext.ColourSet.Any(c => c.ColourId != entity.ColourId && c.Name.ToLower() == entity.Name.ToLower());
+        }
+
+        protected override bool CheckNotInUse(ExampleContext entityContext, int id)
+        {
+            return !entityContext.StuffSet.Any(s => s.ColourId == id);
         }
     }
 }

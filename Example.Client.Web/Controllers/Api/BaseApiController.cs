@@ -39,8 +39,16 @@ namespace Example.Client.Web.Controllers.Api
             if (ModelState.IsValid)
             {
                 var result = await _proxy.Post($"/{_apiPath}/create", newItem);
-                var apiResponse = new ApiResponse<T>(result);
-                return Json(apiResponse);
+                if (result != null)
+                {
+                    var apiResponse = new ApiResponse<T>(result);
+                    return Json(apiResponse);
+                }
+                else
+                {
+                    var apiResponse = new ApiResponse<T>(HttpStatusCode.OK, "Duplicate");
+                    return Json(apiResponse);
+                }
             }
             else
             {
@@ -54,8 +62,16 @@ namespace Example.Client.Web.Controllers.Api
             if (ModelState.IsValid)
             {
                 var result = await _proxy.Put($"/{_apiPath}/update", updatedItem);
-                var apiResponse = new ApiResponse<T>(result);
-                return Json(apiResponse);
+                if (result != null)
+                {
+                    var apiResponse = new ApiResponse<T>(result);
+                    return Json(apiResponse);
+                }
+                else
+                {
+                    var apiResponse = new ApiResponse<T>(HttpStatusCode.OK, "Duplicate");
+                    return Json(apiResponse);
+                }
             }
             else
             {
@@ -66,9 +82,17 @@ namespace Example.Client.Web.Controllers.Api
 
         public async Task<JsonResult> BaseDelete(T deletedItem)
         {
-            await _proxy.Delete($"/{_apiPath}/delete/{deletedItem.EntityId}");
-            var apiResponse = new ApiResponse<T>(deletedItem);
-            return Json(apiResponse);
+            var result = await _proxy.Delete($"/{_apiPath}/delete/{deletedItem.EntityId}");
+            if (result)
+            {
+                var apiResponse = new ApiResponse<T>(deletedItem);
+                return Json(apiResponse);
+            }
+            else
+            {
+                var apiResponse = new ApiResponse<T>(HttpStatusCode.OK, "InUse");
+                return Json(apiResponse);
+            }
         }
     }
 }

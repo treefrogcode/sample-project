@@ -31,8 +31,8 @@ namespace Example.Client.Web.Controllers
         public async Task<ActionResult> Stuff()
         {
             var pagedResults = await _proxy.Get<PagedResults<Stuff>>("/stuff/get?pagesize=12");
-            var colours = await _proxy.Get<PagedResults<Colour>>("/colour/get");
-            var categories = await _proxy.Get<PagedResults<Category>>("/category/get");
+            var colours = await _proxy.Get<PagedResults<Colour>>("/colour/get?pagesize=0");
+            var categories = await _proxy.Get<PagedResults<Category>>("/category/get?pagesize=0");
 
             var model = new StuffViewModel();
             model.PagedResults = pagedResults;

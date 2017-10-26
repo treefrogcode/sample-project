@@ -71,7 +71,7 @@ namespace Example.Client.Proxy.Proxies
                 ConfigureClient(httpClient);
                 var response = await httpClient.DeleteAsync(uri);
                 response.EnsureSuccessStatusCode();
-                return true;
+                return await Task.Run(() => GetResultFromResponse<bool>(response));
             }
         }
 

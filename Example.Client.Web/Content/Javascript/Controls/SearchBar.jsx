@@ -33,7 +33,7 @@
                 <form onSubmit={this.onSearch}>
                     <div className="row">
                         <div className="col-xs-12">
-                            <h3>Search for some stuff</h3>
+                            <h3>{this.props.title}</h3>
                         </div>
                     </div>
                     <div className="row form-inline">

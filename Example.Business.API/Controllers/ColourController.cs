@@ -14,18 +14,20 @@ namespace Example.Business.API.Controllers
     [RoutePrefix("colour")]
     public class ColourController : BaseController
     {
+        private readonly IStuffRepository _stuffRepository;
         private readonly IColourRepository _colourRepository;
         private readonly IColourManager _colourManager;
 
-        public ColourController(IColourRepository colourRepository, IColourManager colourManager)
+        public ColourController(IStuffRepository stuffRepository, IColourRepository colourRepository, IColourManager colourManager)
         {
+            _stuffRepository = stuffRepository;
             _colourRepository = colourRepository;
             _colourManager = colourManager;
         }
 
         [HttpGet]
         [Route("get")]
-        public PagedResults<Colour> Get(string search = "", int page = 1, int pageSize = 0)
+        public PagedResults<Colour> Get(string search = "", int page = 1, int pageSize = 10)
         {
             var colour = _colourManager.GetColours(search, page, pageSize);
             return colour;
@@ -49,9 +51,9 @@ namespace Example.Business.API.Controllers
 
         [HttpDelete]
         [Route("delete/{deletedColourId}")]
-        public void Delete(int deletedColourId)
+        public bool Delete(int deletedColourId)
         {
-            _colourRepository.Remove(deletedColourId);
+            return _colourRepository.Remove(deletedColourId);
         }
     }
 }

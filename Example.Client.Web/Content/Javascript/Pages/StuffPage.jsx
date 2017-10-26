@@ -37,6 +37,7 @@
             Two: '',
             Three: '',
             EntityId: 0,
+            EntityName : ''
         };
 
         return empty;
@@ -54,6 +55,10 @@
         this.setState({
             adding: true,
             data: this.emptyData()
+        }, () => {
+            $('html, body').animate({
+                scrollTop: $("#stuff-form").offset().top
+            }, 800);
         });
     }
 
@@ -137,8 +142,8 @@
     render() {
         return (
             <div className="row">
-                <SearchBar onSearch={this.onSearch} />
-                <StuffList colour="Stuff" title="List of Stuff" data={this.state.list} page={this.state.page} pageSize={this.state.pageSize} totalRecords={this.state.totalRecords} gotoPage={this.gotoPage} editClick={this.editClick} deleteClick={this.deleteClick} />
+                <SearchBar title="Stuff search" onSearch={this.onSearch} />
+                <StuffList title="Stuff List" data={this.state.list} page={this.state.page} pageSize={this.state.pageSize} totalRecords={this.state.totalRecords} gotoPage={this.gotoPage} editClick={this.editClick} deleteClick={this.deleteClick} />
                 <div className="col-xs-12 pb20">
                     <a className="btn btn-primary mr20" onClick={this.reverseClick }>{this.state.reverse ? "Sort A-Z" : "Sort Z-A"}</a>
                     <a className="btn btn-warning" onClick={this.addClick}>Add New</a>

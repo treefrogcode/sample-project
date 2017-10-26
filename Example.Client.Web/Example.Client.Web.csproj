@@ -251,9 +251,12 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\Api\BaseApiController.cs" />
-    <Compile Include="Controllers\Api\ChildApiController.cs" />
+    <Compile Include="Controllers\Api\CategoryApiController.cs" />
+    <Compile Include="Controllers\Api\ColourApiController.cs" />
     <Compile Include="Controllers\Api\StuffApiController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ColourController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -294,9 +297,10 @@
     <Content Include="Content\Javascript\Controls\Forms\Dropdown.jsx" />
     <Content Include="Content\Javascript\Controls\Forms\CheckList.jsx" />
     <Content Include="Content\Javascript\Controls\Stuff\CategoryModal.jsx" />
+    <Content Include="Content\Javascript\Controls\Admin\AdminEntityList.jsx" />
     <None Include="Content\Javascript\Controls\Stuff\StuffList.jsx" />
     <Content Include="Content\Javascript\Controls\SearchBar.jsx" />
-    <Content Include="Content\Javascript\Pages\ColourPage.jsx" />
+    <Content Include="Content\Javascript\Pages\AdminPage.jsx" />
     <None Include="Content\Javascript\Pages\StuffPage.jsx" />
     <None Include="Content\Javascript\Controls\Stuff\Stuff.jsx" />
     <Content Include="readme.txt" />
@@ -335,7 +339,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Stuff.cshtml" />
-    <Content Include="Views\Home\Child.cshtml" />
+    <Content Include="Views\Colour\Index.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -351,10 +356,6 @@
     <ProjectReference Include="..\Core.Common\Core.Common.csproj">
       <Project>{04d1f929-afb8-4814-85df-46317225a636}</Project>
       <Name>Core.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Example.Business.Models\Example.Business.Models.csproj">
-      <Project>{E351055D-5480-4BF4-8374-B7ED6FABCE3F}</Project>
-      <Name>Example.Business.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Example.Client.Models\Example.Client.Models.csproj">
       <Project>{9ba3ac06-d4ed-42bb-b59d-e5bec6ffe6e1}</Project>

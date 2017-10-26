@@ -1,7 +1,7 @@
 ﻿@model string
 
 @{
-    ViewBag.Title = "Stuff Page";
+    ViewBag.Title = "Colour Page";
 }
 
 <div id="react-content"></div>
@@ -10,7 +10,7 @@
 {
     <script type="text/javascript">
         ReactDOM.render(
-            React.createElement(ColourPage, { initialData: '@Html.Raw(Model)' }),
+            React.createElement(AdminPage, { initialData: '@Html.Raw(Model)', type: 'Colour' }),
             document.getElementById('react-content')
         );
     </script>

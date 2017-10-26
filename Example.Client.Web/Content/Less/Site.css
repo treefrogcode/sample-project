@@ -71,3 +71,9 @@ option.grey {
 .modal-list {
   display: block;
 }
+.pagination .buttons {
+  margin-right: -25px;
+}
+.add-row {
+  background-color: #fff;
+}

@@ -37,5 +37,15 @@ namespace Example.Data.Repositories
                     where e.CategoryId == entity.CategoryId
                     select e).FirstOrDefault();
         }
+
+        protected override bool CheckNotDuplicate(ExampleContext entityContext, Category entity)
+        {
+            return !entityContext.CategorySet.Any(c => c.CategoryId != entity.CategoryId && c.Name.ToLower() == entity.Name.ToLower());
+        }
+
+        protected override bool CheckNotInUse(ExampleContext entityContext, int id)
+        {
+            return !entityContext.StuffSet.Any(s => s.Categories.Any(c => c.CategoryId == id));
+        }
     }
 }

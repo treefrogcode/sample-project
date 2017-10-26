@@ -3,7 +3,7 @@ VDS.Utils = VDS.Utils || {};
 
 VDS.Utils.Ajax = function () {
 
-    //supports methods { onOK, onInvalid, onError, onOther }
+    //supports methods { onOK, onInvalid, onDuplicate, onInUse, onError, onOther }
 
     var post = function (url, data, methods) {
         $.ajax({
@@ -21,6 +21,16 @@ VDS.Utils.Ajax = function () {
                         case "Invalid":
                             if (typeof methods.onInvalid !== "undefined") {
                                 methods.onInvalid(response.Result);
+                            }
+                            break;
+                        case "Duplicate":
+                            if (typeof methods.onDuplicate !== "undefined") {
+                                methods.onDuplicate(response.Result);
+                            }
+                            break;
+                        case "InUse":
+                            if (typeof methods.onInUse !== "undefined") {
+                                methods.onInUse(response.Result);
                             }
                             break;
                         default:

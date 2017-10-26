@@ -2,8 +2,6 @@
 using Example.Client.Models.Entities;
 using Example.Client.Modles.Dtos;
 using Example.Client.Proxy.Interfaces;
-using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 

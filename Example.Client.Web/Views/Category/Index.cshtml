@@ -1,0 +1,17 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Category Page";
+}
+
+<div id="react-content"></div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        ReactDOM.render(
+            React.createElement(AdminPage, { initialData: '@Html.Raw(Model)', type: 'Category' }),
+            document.getElementById('react-content')
+        );
+    </script>
+}

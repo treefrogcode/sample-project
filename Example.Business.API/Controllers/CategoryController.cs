@@ -25,7 +25,7 @@ namespace Example.Business.API.Controllers
 
         [HttpGet]
         [Route("get")]
-        public PagedResults<Category> Get(string search = "", int page = 1, int pageSize = 0)
+        public PagedResults<Category> Get(string search = "", int page = 1, int pageSize = 10)
         {
             var category = _categoryManager.GetCategories(search, page, pageSize);
             return category;
@@ -49,9 +49,9 @@ namespace Example.Business.API.Controllers
 
         [HttpDelete]
         [Route("delete/{deletedCategoryId}")]
-        public void Delete(int deletedCategoryId)
+        public bool Delete(int deletedCategoryId)
         {
-            _categoryRepository.Remove(deletedCategoryId);
+            return _categoryRepository.Remove(deletedCategoryId);
         }
     }
 }

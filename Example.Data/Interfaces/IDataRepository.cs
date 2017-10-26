@@ -18,9 +18,9 @@ namespace Example.Data.Interfaces
     {
         T Add(T entity);
 
-        void Remove(T entity);
+        bool Remove(T entity);
 
-        void Remove(int id);
+        bool Remove(int id);
 
         T Update(T entity);
 

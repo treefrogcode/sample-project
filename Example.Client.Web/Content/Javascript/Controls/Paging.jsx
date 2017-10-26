@@ -11,11 +11,12 @@
     }
 
     getPagingState(props) {
-        let totalPages = Math.ceil(props.totalRecords / props.pageSize);
+        let pageSize = props.pageSize === 0 ? 10 : props.pageSize; // Avoid divide by zero error
+        let totalPages = Math.ceil(props.totalRecords / pageSize);
         let prevPage = props.page === 1 ? null : props.page - 1;
         let nextPage = props.page === totalPages ? null : props.page + 1;
-        let showStart = props.totalRecords === 0 ? 0 : ((props.page - 1) * props.pageSize) + 1;
-        let showEnd = showStart + props.pageSize > props.totalRecords ? props.totalRecords : showStart + props.pageSize - 1;
+        let showStart = props.totalRecords === 0 ? 0 : ((props.page - 1) * pageSize) + 1;
+        let showEnd = showStart + pageSize > props.totalRecords ? props.totalRecords : showStart + pageSize - 1;
         return {
             page: props.page,
             totalPages: totalPages,
@@ -48,7 +49,7 @@
             <div className="col-xs-12 pagination">
                 <div className="row">
                     <div className="col-xs-6 hidden-xs hidden-sm">Showing records {this.state.showStart} to {this.state.showEnd} of {this.props.totalRecords}</div>
-                    <div className="col-xs-12 col-md-6 pull-right text-right">
+                    <div className="col-xs-12 col-md-6 pull-right text-right buttons">
                         <a disabled={this.state.prevDisabled} className="btn btn-primary mr10" onClick={this.gotoPage.bind(this, this.state.prevPage) }>&laquo;</a>
                         {pages}
                         <a disabled={this.state.nextDisabled} className="btn btn-primary mr10" onClick={this.gotoPage.bind(this, this.state.nextPage) }>&raquo;</a>
