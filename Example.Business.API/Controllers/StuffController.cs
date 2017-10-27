@@ -20,11 +20,11 @@ namespace Example.Business.API.Controllers
             _stuffManager = stuffManager;
         }
 
+        [TokenAuthentication(Public = true)]
         [HttpGet]
         [Route("get")]
         public PagedResults<Stuff> Get(string search = "", int page = 1, int pageSize = 0)
         {
-
             var stuff = _stuffManager.GetStuff(search, page, pageSize);
             return stuff;
         }

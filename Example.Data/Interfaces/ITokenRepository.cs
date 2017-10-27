@@ -4,5 +4,6 @@ namespace Example.Data.Interfaces
 {
     public interface ITokenRepository : IDataRepository<Token>
     {
+        bool CheckTokenIsValid(string guid, bool isPublic);
     }
 }

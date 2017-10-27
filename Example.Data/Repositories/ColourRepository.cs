@@ -21,8 +21,8 @@ namespace Example.Data.Repositories
 
         protected override IEnumerable<Colour> GetEntities(ExampleContext entityContext)
         {
-            return from e in entityContext.ColourSet
-                   orderby e.Name
+                return from e in entityContext.ColourSet
+                       .OrderBy(c => c.Name)
                    select e;
         }
 

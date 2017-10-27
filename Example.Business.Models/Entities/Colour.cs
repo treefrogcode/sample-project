@@ -1,5 +1,4 @@
 ﻿using Example.Business.Models.Interfaces;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Example.Business.Models.Entities

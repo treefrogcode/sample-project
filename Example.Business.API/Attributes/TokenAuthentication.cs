@@ -1,4 +1,5 @@
 ﻿using Example.Data.Context;
+using Example.Data.Interfaces;
 using System;
 using System.Linq;
 using System.Net;
@@ -18,20 +19,11 @@ namespace Example.Business.API.Attributes
 
             var header = context.Request.Headers.SingleOrDefault(x => x.Key == "ApiToken");
 
+            ITokenRepository tokenRepository = (ITokenRepository)context.Request.GetDependencyScope().GetService(typeof(ITokenRepository));
+
             if (header.Value != null)
             {
-                // In .net core this can be injected and this becomes a service filter
-                // having this here is awful I know but as it's just a demo.....
-                using (var dbContext = new ExampleContext())
-                {
-                    var token = dbContext.TokenSet.Where(t => t.Guid.ToString() == header.Value.FirstOrDefault().ToString()).FirstOrDefault();
-                    if (token != null && (Public || !token.IsPublic))
-                    {
-                        valid = true;
-                        token.LastAccessed = DateTime.Now;
-                        dbContext.SaveChanges();
-                    }
-                }
+                valid = tokenRepository.CheckTokenIsValid(header.Value.FirstOrDefault().ToString(), Public);
             }
 
             if (!valid)

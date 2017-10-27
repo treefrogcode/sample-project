@@ -7,6 +7,7 @@ using System.Web.Http;
 
 namespace Example.Business.API.Controllers
 {
+    [TokenAuthentication(Public = true)]
     [RoutePrefix("colour")]
     public class ColourController : BaseController
     {
@@ -21,7 +22,6 @@ namespace Example.Business.API.Controllers
             _colourManager = colourManager;
         }
 
-        [TokenAuthentication(Public=true)]
         [HttpGet]
         [Route("get")]
         public PagedResults<Colour> Get(string search = "", int page = 1, int pageSize = 10)
@@ -30,7 +30,6 @@ namespace Example.Business.API.Controllers
             return colour;
         }
 
-        [TokenAuthentication]
         [HttpGet]
         [Route("get-admin")]
         public PagedResults<Colour> GetAdmin(string search = "", int page = 1, int pageSize = 10)

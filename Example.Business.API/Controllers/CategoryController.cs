@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace Example.Business.API.Controllers
 {
-    [TokenAuthentication]
+    [TokenAuthentication(Public = true)]
     [RoutePrefix("category")]
     public class CategoryController : BaseController
     {
