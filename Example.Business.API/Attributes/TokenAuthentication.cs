@@ -10,6 +10,8 @@ namespace Example.Business.API.Attributes
 {
     public class TokenAuthentication : AuthorizationFilterAttribute
     {
+        public bool Public { get; set; }
+
         public override void OnAuthorization(HttpActionContext context)
         {
             var valid = false;
@@ -23,7 +25,7 @@ namespace Example.Business.API.Attributes
                 using (var dbContext = new ExampleContext())
                 {
                     var token = dbContext.TokenSet.Where(t => t.Guid.ToString() == header.Value.FirstOrDefault().ToString()).FirstOrDefault();
-                    if (token != null)
+                    if (token != null && (Public || !token.IsPublic))
                     {
                         valid = true;
                         token.LastAccessed = DateTime.Now;

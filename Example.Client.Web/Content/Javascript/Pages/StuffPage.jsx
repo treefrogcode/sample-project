@@ -74,7 +74,7 @@
     }
 
     deleteClick(data) {
-        VDS.Utils.Ajax.post('/api/stuff/delete', data,
+        Example.Utils.Ajax.post('/api/stuff/delete', data,
         {
             onOK: (result) => {
                 this.onSearch(this.state.search, this.state.page);
@@ -95,14 +95,14 @@
     saveClick(data) {
         var add = data.StuffId === 0;
         var url = add ? '/api/stuff/create' : '/api/stuff/update';
-        VDS.Utils.Ajax.post(url, data,
+        Example.Utils.Ajax.post(url, data,
         {
             onOK: (result) => {
                 if (add) {
                     this.onSearch(this.state.search, this.state.page);
                 }
                 else {
-                    VDS.Utils.Array.updateEntityItem(this.state.list, result, "StuffId");
+                    Example.Utils.Array.updateEntityItem(this.state.list, result, "StuffId");
                 }
                 this.setState({
                     adding: false,
@@ -121,7 +121,7 @@
 
         var url = this.state.reverse ? 'reverse-search' : 'search';
 
-        VDS.Utils.Ajax.post('/api/stuff/' + url + '?search=' + search + '&page=' + page, null,
+        Example.Utils.Ajax.post('/api/stuff/' + url + '?search=' + search + '&page=' + page, null,
         {
             onOK: (response) => {
                 this.setState({

@@ -28,10 +28,10 @@
         this.state.data[ref] = value;
 
         if (ref === "ColourId") {
-            this.state.data.Colour = VDS.Utils.Array.getEntityItem(this.props.colours, value, "EntityId");
+            this.state.data.Colour = Example.Utils.Array.getEntityItem(this.props.colours, value, "EntityId");
         }
         else if (ref === "Categories") {
-            this.state.data.Categories = VDS.Utils.Array.getAllEntityItems(this.props.categories, value, "EntityId");
+            this.state.data.Categories = Example.Utils.Array.getAllEntityItems(this.props.categories, value, "EntityId");
         }
 
         this.setState({ data: this.state.data, inError: this.checkIfError(this.state.data) });

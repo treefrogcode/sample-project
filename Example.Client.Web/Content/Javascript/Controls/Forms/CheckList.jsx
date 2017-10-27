@@ -6,7 +6,7 @@
         this.cleanLabel = this.props.label.replace(" ", "");
 
         this.state = {
-            value: VDS.Utils.Array.turnIntoFlatStringArray(props.value, "EntityId"),
+            value: Example.Utils.Array.turnIntoFlatStringArray(props.value, "EntityId"),
             data: props.data
         };
 
@@ -15,7 +15,7 @@
 
     componentWillReceiveProps(newProps) { // inbuilt method
         this.setState({
-            value: VDS.Utils.Array.turnIntoFlatStringArray(newProps.value, "EntityId"),
+            value: Example.Utils.Array.turnIntoFlatStringArray(newProps.value, "EntityId"),
             data: newProps.data
         });
     }
@@ -23,8 +23,8 @@
     onChange(event) {
         var value = $.trim(event.target.value);
         var checked = event.target.checked;
-        var current = VDS.Utils.Array.getEntityItem(this.state.value, value, "EntityId");
-        VDS.Utils.Array.removeEntityItem(this.state.value, value);
+        var current = Example.Utils.Array.getEntityItem(this.state.value, value, "EntityId");
+        Example.Utils.Array.removeEntityItem(this.state.value, value);
         if (checked) this.state.value.push(value);
 
         this.setState({
@@ -39,7 +39,7 @@
     render() {
 
         const options = this.state.data.map((opt) => {
-            var checked = VDS.Utils.Array.getEntityItem(this.state.value, opt.EntityId) !== null;
+            var checked = Example.Utils.Array.getEntityItem(this.state.value, opt.EntityId) !== null;
             return (
                 <div key={opt.EntityId} className="checkbox">
                     <label>

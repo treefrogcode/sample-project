@@ -1,12 +1,9 @@
-﻿using Example.Business.API.Attributes;
-using Example.Business.Logic.Managers;
+﻿using Core.Common.Dtos;
+using Example.Business.API.Attributes;
 using Example.Business.Logic.Interfaces;
-using Core.Common.Dtos;
 using Example.Business.Models.Entities;
 using Example.Data.Interfaces;
-using System.Collections.Generic;
 using System.Web.Http;
-using System.Linq;
 
 namespace Example.Business.API.Controllers
 {

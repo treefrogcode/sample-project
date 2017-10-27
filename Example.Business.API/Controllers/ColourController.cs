@@ -1,16 +1,12 @@
-﻿using Example.Business.API.Attributes;
-using Example.Business.Logic.Managers;
+﻿using Core.Common.Dtos;
+using Example.Business.API.Attributes;
 using Example.Business.Logic.Interfaces;
-using Core.Common.Dtos;
 using Example.Business.Models.Entities;
 using Example.Data.Interfaces;
-using System.Collections.Generic;
 using System.Web.Http;
-using System.Linq;
 
 namespace Example.Business.API.Controllers
 {
-    [TokenAuthentication]
     [RoutePrefix("colour")]
     public class ColourController : BaseController
     {
@@ -25,9 +21,19 @@ namespace Example.Business.API.Controllers
             _colourManager = colourManager;
         }
 
+        [TokenAuthentication(Public=true)]
         [HttpGet]
         [Route("get")]
         public PagedResults<Colour> Get(string search = "", int page = 1, int pageSize = 10)
+        {
+            var colour = _colourManager.GetColours(search, page, pageSize);
+            return colour;
+        }
+
+        [TokenAuthentication]
+        [HttpGet]
+        [Route("get-admin")]
+        public PagedResults<Colour> GetAdmin(string search = "", int page = 1, int pageSize = 10)
         {
             var colour = _colourManager.GetColours(search, page, pageSize);
             return colour;

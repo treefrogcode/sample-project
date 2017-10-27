@@ -20,7 +20,7 @@
     }
 
     deleteClick(data, callback) {
-        VDS.Utils.Ajax.post('/api/' + this.props.type + '/delete', data,
+        Example.Utils.Ajax.post('/api/' + this.props.type + '/delete', data,
         {
             onOK: (result) => {
                 this.onSearch(this.state.search, this.state.page);
@@ -38,14 +38,14 @@
         var add = data.EntityId === 0;
         var url = add ? '/api/' + this.props.type + '/create' : '/api/' + this.props.type + '/update';
 
-        VDS.Utils.Ajax.post(url, data,
+        Example.Utils.Ajax.post(url, data,
         {
             onOK: (result) => {
                 if (add) {
                     this.onSearch(this.state.search, this.state.page);
                 }
                 else {
-                    VDS.Utils.Array.updateEntityItem(this.state.list, result, 'EntityId');
+                    Example.Utils.Array.updateEntityItem(this.state.list, result, 'EntityId');
                 }
 
                 this.setState({
@@ -68,7 +68,7 @@
     }
 
     onSearch(search, page) {
-        VDS.Utils.Ajax.post('/api/' + this.props.type + '/search?search=' + search + '&page=' + page, null,
+        Example.Utils.Ajax.post('/api/' + this.props.type + '/search?search=' + search + '&page=' + page, null,
         {
             onOK: (response) => {
                 this.setState({

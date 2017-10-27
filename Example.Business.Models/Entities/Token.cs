@@ -1,8 +1,5 @@
 ﻿using Example.Business.Models.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Example.Business.Models.Entities
 {
@@ -10,6 +7,7 @@ namespace Example.Business.Models.Entities
     {
         public int TokenId { get; set; }
         public string Guid { get; set; }
+        public bool IsPublic { get; set; }
         public string System { get; set; }
         public DateTime LastAccessed { get; set; }
         public int EntityId

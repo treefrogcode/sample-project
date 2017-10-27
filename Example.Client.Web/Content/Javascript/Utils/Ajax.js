@@ -1,7 +1,7 @@
-﻿var VDS = VDS || {};
-VDS.Utils = VDS.Utils || {};
+﻿var Example = Example || {};
+Example.Utils = Example.Utils || {};
 
-VDS.Utils.Ajax = function () {
+Example.Utils.Ajax = function () {
 
     //supports methods { onOK, onInvalid, onDuplicate, onInUse, onError, onOther }
 

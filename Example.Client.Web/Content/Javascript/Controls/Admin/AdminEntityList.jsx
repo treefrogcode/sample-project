@@ -83,7 +83,7 @@
     }
 
     onKeyDown(entity, event) {
-        if (event.key == 'Enter') {
+        if (this.state.editValue !== '' && event.key == 'Enter') {
             this.saveClick(entity);
         }
     }
@@ -134,8 +134,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                        this.state.editId === 0 ? 
+                        {this.state.editId === 0 &&
                         <tr className="add-row">
                             <td width="10%">-</td>
                             <td>
@@ -148,9 +147,7 @@
                                 </span>
                             </td>
                         </tr>
-                        : null
                         }
-
                         {nodes}
                     </tbody>
                     <tfoot>

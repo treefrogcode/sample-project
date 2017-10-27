@@ -1,7 +1,7 @@
-﻿var VDS = VDS || {};
-VDS.Utils = VDS.Utils || {};
+﻿var Example = Example || {};
+Example.Utils = Example.Utils || {};
 
-VDS.Utils.Array = function () {
+Example.Utils.Array = function () {
 
     var getEntityItem = function (list, value, property) {
         var withProperty = typeof property !== "undefined" && property !== null && property !== "";
