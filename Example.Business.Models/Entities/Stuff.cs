@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Example.Business.Models.Entities
 {
-    public class Stuff : BaseEntity, IIdentifiableEntity
+    public class Stuff : BaseEntity, IIdentifiableEntity, IOwnedEntity
     {
         public int StuffId { get; set; }
 
@@ -15,6 +15,8 @@ namespace Example.Business.Models.Entities
 
         public int? ColourId { get; set; }
 
+        public string Owner { get; set; }
+
         public virtual Colour Colour { get; set; }
 
         public virtual ICollection<Category> Categories { get; set; }
@@ -23,6 +25,12 @@ namespace Example.Business.Models.Entities
         {
             get { return StuffId; }
             set { StuffId = value; }
+        }
+
+        public string EntityOwner
+        {
+            get { return Owner; }
+            set { Owner = value; }
         }
     }
 }

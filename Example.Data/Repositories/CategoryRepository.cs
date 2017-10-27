@@ -3,11 +3,18 @@ using Example.Data.Interfaces;
 using System.Linq;
 using System.Collections.Generic;
 using Example.Data.Context;
+using System.Web;
+using Example.Business.Models.Dtos;
 
 namespace Example.Data.Repositories
 {
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
+        public CategoryRepository(HttpContextBase httpContext, Session session) : base(httpContext, session)
+        {
+
+        }
+
         protected override Category AddEntity(ExampleContext entityContext, Category entity)
         {
             return entityContext.CategorySet.Add(entity);
@@ -33,9 +40,7 @@ namespace Example.Data.Repositories
 
         protected override Category UpdateEntity(ExampleContext entityContext, Category entity)
         {
-            return (from e in entityContext.CategorySet
-                    where e.CategoryId == entity.CategoryId
-                    select e).FirstOrDefault();
+            return GetEntity(entityContext, entity.CategoryId);
         }
 
         protected override bool CheckNotDuplicate(ExampleContext entityContext, Category entity)

@@ -3,6 +3,7 @@ using Example.Business.API.Attributes;
 using Example.Business.Logic.Interfaces;
 using Example.Business.Models.Entities;
 using Example.Data.Interfaces;
+using System.Linq;
 using System.Web.Http;
 
 namespace Example.Business.API.Controllers

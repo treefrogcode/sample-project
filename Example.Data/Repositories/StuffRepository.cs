@@ -4,11 +4,18 @@ using System.Linq;
 using System.Collections.Generic;
 using Example.Data.Context;
 using System.Data.Entity;
+using System.Web;
+using Example.Business.Models.Dtos;
 
 namespace Example.Data.Repositories
 {
     public class StuffRepository : BaseRepository<Stuff>, IStuffRepository
     {
+        public StuffRepository(HttpContextBase httpContext, Session session) : base(httpContext, session)
+        {
+
+        }
+
         public Stuff GetByOne(string one)
         {
             using (ExampleContext entityContext = new ExampleContext())
@@ -62,9 +69,7 @@ namespace Example.Data.Repositories
             if (entity.Colour != null) entityContext.Entry(entity.Colour).State = EntityState.Unchanged;
 
             // Get existing object
-            var result =  (from e in entityContext.StuffSet
-                    where e.StuffId == entity.StuffId
-                    select e).FirstOrDefault();
+            var result = GetEntity(entityContext, entity.StuffId);
 
             // Clear child lists and set source to get actual EF list
             result.Categories.Clear();

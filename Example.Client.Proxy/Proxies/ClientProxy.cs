@@ -13,6 +13,7 @@ namespace Example.Client.Proxy.Proxies
     {
         private string _baseURL;
         private string _token;
+        private string _owner;
 
         public ClientProxy()
         {

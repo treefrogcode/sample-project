@@ -1,29 +1,35 @@
-﻿using Example.Business.Models.Entities;
+﻿using Example.Business.Models.Dtos;
+using Example.Business.Models.Entities;
 using Example.Data.Context;
 using Example.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 
 namespace Example.Data.Repositories
 {
     public class TokenRepository : BaseRepository<Token>, ITokenRepository
     {
-        public bool CheckTokenIsValid(string guid, bool isPublic)
+        public TokenRepository(HttpContextBase httpContext, Session session) : base(httpContext, session)
         {
-            var result = false;
+
+        }
+
+        public Token CheckTokenIsValid(string guid, bool isPublic)
+        {
+            Token token = null;
             using (var dbContext = new ExampleContext())
             {
-                var token = dbContext.TokenSet.Where(t => t.Guid.ToString() == guid).FirstOrDefault();
+                token = dbContext.TokenSet.Where(t => t.Guid.ToString() == guid).FirstOrDefault();
                 if (token != null && (isPublic || !token.IsPublic))
                 {
-                    result = true;
                     token.LastAccessed = DateTime.Now;
                     dbContext.SaveChanges();
                 }
             }
 
-            return result;
+            return token;
         }
 
 
@@ -51,9 +57,7 @@ namespace Example.Data.Repositories
 
         protected override Token UpdateEntity(ExampleContext entityContext, Token entity)
         {
-            return (from e in entityContext.TokenSet
-                    where e.TokenId == entity.TokenId
-                    select e).FirstOrDefault();
+            return GetEntity(entityContext, entity.TokenId);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Example.Data.Context
 
             // Standard tables
             modelBuilder.Entity<Token>().HasKey(e => e.TokenId).Ignore(e => e.EntityId);
-            modelBuilder.Entity<Stuff>().HasKey(e => e.StuffId).Ignore(e => e.EntityId);
+            modelBuilder.Entity<Stuff>().HasKey(e => e.StuffId).Ignore(e => e.EntityId).Ignore(e => e.EntityOwner);
             modelBuilder.Entity<Colour>().HasKey(e => e.ColourId).Ignore(e => e.EntityId);
             modelBuilder.Entity<Category>().HasKey(e => e.CategoryId).Ignore(e => e.EntityId);
 

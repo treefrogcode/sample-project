@@ -4,11 +4,18 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using Example.Data.Context;
+using System.Web;
+using Example.Business.Models.Dtos;
 
 namespace Example.Data.Repositories
 {
     public class ColourRepository : BaseRepository<Colour>, IColourRepository
     {
+        public ColourRepository(HttpContextBase httpContext, Session session) : base(httpContext, session)
+        {
+
+        }
+
         protected bool InUse(ExampleContext entityContext, Colour entity)
         {
             return entityContext.StuffSet.Any(s => s.ColourId == entity.ColourId);
@@ -39,9 +46,7 @@ namespace Example.Data.Repositories
 
         protected override Colour UpdateEntity(ExampleContext entityContext, Colour entity)
         {
-            return (from e in entityContext.ColourSet
-                    where e.ColourId == entity.ColourId
-                    select e).FirstOrDefault();
+            return GetEntity(entityContext, entity.ColourId);
         }
 
         protected override bool CheckNotDuplicate(ExampleContext entityContext, Colour entity)

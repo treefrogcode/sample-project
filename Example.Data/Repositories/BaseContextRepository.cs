@@ -1,8 +1,7 @@
 ﻿using Core.Common.Utils.Utils;
-using Example.Business.Models.Entities;
+using Example.Business.Models.Dtos;
 using Example.Business.Models.Interfaces;
 using Example.Data.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -14,6 +13,23 @@ namespace Example.Data.Repositories
         where T : class, IIdentifiableEntity, new()
         where U : DbContext, new()
     {
+        protected HttpContextBase _httpContext;
+        protected Session _session;
+
+        protected string ApiToken
+        {
+            get
+            {
+                return _httpContext.Request.Headers["ApiToken"];
+            }
+        }
+
+        protected BaseContextRepository(HttpContextBase httpContext, Session session)
+        {
+            _httpContext = httpContext;
+            _session = session;
+        }
+
         protected abstract T AddEntity(U entityContext, T entity);
 
         protected abstract T UpdateEntity(U entityContext, T entity);
@@ -55,7 +71,8 @@ namespace Example.Data.Repositories
             {
                 if (CheckNotInUse(entityContext, entity.EntityId))
                 {
-                    entityContext.Entry<T>(entity).State = EntityState.Deleted;
+                    T removalEntity = GetEntity(entityContext, entity.EntityId); // ensure owned entity
+                    entityContext.Entry<T>(removalEntity).State = EntityState.Deleted;
                     entityContext.SaveChanges();
                     return true;
                 }
@@ -105,13 +122,44 @@ namespace Example.Data.Repositories
         public IEnumerable<T> Get()
         {
             using (U entityContext = new U())
+            {
+                if (FilterResultsByOwner())
+                {
+                    return (GetEntities(entityContext)).Where(x => EntityIsOwnedByOwner(x)).ToArray().ToList();
+                }
+
                 return (GetEntities(entityContext)).ToArray().ToList();
+            }
         }
 
         public T Get(int id)
         {
+
             using (U entityContext = new U())
-                return GetEntity(entityContext, id);
+            {
+                var result = GetEntity(entityContext, id);
+
+                if (FilterResultsByOwner() && !EntityIsOwnedByOwner(result)) return null;
+
+                return result;
+            }
+        }
+
+        private bool EntityIsOwnedByOwner(T entity)
+        {
+            return (entity as IOwnedEntity).EntityOwner == ApiToken;
+        }
+
+        private bool FilterResultsByOwner()
+        {
+            var isPublic = _session.Values != null && _session.Values.ContainsKey("IsPublic") && _session.Values["IsPublic"] == true.ToString();
+
+            if (isPublic && typeof(IOwnedEntity).IsAssignableFrom(typeof(T)))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
