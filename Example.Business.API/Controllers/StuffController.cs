@@ -56,9 +56,9 @@ namespace Example.Business.API.Controllers
 
         [HttpDelete]
         [Route("delete/{deletedStuffId}")]
-        public void Delete(int deletedStuffId)
+        public bool Delete(int deletedStuffId)
         {
-            _stuffRepository.Remove(deletedStuffId);
+            return _stuffRepository.Remove(deletedStuffId);
         }
     }
 }

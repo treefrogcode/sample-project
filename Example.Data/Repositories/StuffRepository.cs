@@ -74,11 +74,19 @@ namespace Example.Data.Repositories
             // Clear child lists and set source to get actual EF list
             result.Categories.Clear();
             var categorySet = entityContext.CategorySet.ToList();
+            entity.Categories = entity.Categories != null ? entity.Categories : new List<Category>();
             var realCats = categorySet.Where(s => entity.Categories.Any(e => e.CategoryId == s.CategoryId)).ToList();
             entity.Categories = realCats;
 
             // Return result
             return result;
+        }
+        protected override Stuff DeleteEntity(ExampleContext entityContext, int id)
+        {
+            var deleteEntity = GetEntity(entityContext, id);
+            if (deleteEntity == null) return null;
+            deleteEntity.Categories.Clear();
+            return deleteEntity;
         }
     }
 }

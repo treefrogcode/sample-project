@@ -95,6 +95,7 @@
     saveClick(data) {
         var add = data.StuffId === 0;
         var url = add ? '/api/stuff/create' : '/api/stuff/update';
+        data.EntityName = data.One; // needed as Stuff implements INamedEntity but we used property One in the jsx pages
         Example.Utils.Ajax.post(url, data,
         {
             onOK: (result) => {

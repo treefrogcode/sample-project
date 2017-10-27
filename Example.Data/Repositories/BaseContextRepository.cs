@@ -48,13 +48,24 @@ namespace Example.Data.Repositories
             return true;
         }
 
+        protected virtual T DeleteEntity(U entityContext, int id)
+        {
+            return GetEntity(entityContext, id);
+        }
+
         public T Add(T entity)
         {
+            if (SetOwnerToToken(entity))
+            {
+                (entity as IOwnedEntity).EntityOwner = ApiToken;
+            }
+
             using (U entityContext = new U())
             {
                 if (CheckNotDuplicate(entityContext, entity))
                 {
                     T addedEntity = AddEntity(entityContext, entity);
+
                     entityContext.SaveChanges();
                     return addedEntity;
                 }
@@ -71,9 +82,13 @@ namespace Example.Data.Repositories
             {
                 if (CheckNotInUse(entityContext, entity.EntityId))
                 {
-                    T removalEntity = GetEntity(entityContext, entity.EntityId); // ensure owned entity
-                    entityContext.Entry<T>(removalEntity).State = EntityState.Deleted;
-                    entityContext.SaveChanges();
+                    T removalEntity = DeleteEntity(entityContext, entity.EntityId); // ensure owned entity
+                    if (removalEntity != null)
+                    {
+                        entityContext.Entry<T>(removalEntity).State = EntityState.Deleted;
+                        entityContext.SaveChanges();
+                    }
+
                     return true;
                 }
                 else
@@ -89,8 +104,8 @@ namespace Example.Data.Repositories
             {
                 if (CheckNotInUse(entityContext, id))
                 {
-                    T entity = GetEntity(entityContext, id);
-                    entityContext.Entry<T>(entity).State = EntityState.Deleted;
+                    T entity = DeleteEntity(entityContext, id);
+                    entityContext.Entry(entity).State = EntityState.Deleted;
                     entityContext.SaveChanges();
                     return true;
                 }
@@ -143,6 +158,11 @@ namespace Example.Data.Repositories
 
                 return result;
             }
+        }
+
+        private bool SetOwnerToToken(T entity)
+        {
+            return typeof(IOwnedEntity).IsAssignableFrom(typeof(T)) && string.IsNullOrWhiteSpace((entity as IOwnedEntity).EntityOwner);
         }
 
         private bool EntityIsOwnedByOwner(T entity)

@@ -32,7 +32,6 @@ namespace Example.Data.Repositories
             return token;
         }
 
-
         protected override Token AddEntity(ExampleContext entityContext, Token entity)
         {
             return entityContext.TokenSet.Add(entity);
