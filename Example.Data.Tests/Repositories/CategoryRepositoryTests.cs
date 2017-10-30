@@ -11,29 +11,27 @@ using Xunit;
 
 namespace Example.Data.Tests.Repositories
 {
-    public class ColourRepositoryTests
+    public class CategoryRepositoryTests
     {
         private readonly Mock<ExampleContext> _dbContext;
         private readonly Mock<HttpContextBase> _httpContext;
         private readonly Mock<Session> _session;
-        private readonly ColourRepository _repository;
+        private readonly CategoryRepository _repository;
 
-        public ColourRepositoryTests()
+        public CategoryRepositoryTests()
         {
             _dbContext = new Mock<ExampleContext>();
-
             _httpContext = new Mock<HttpContextBase>();
             _session = new Mock<Session>();
-            _repository = new ColourRepository(_dbContext.Object, _httpContext.Object, _session.Object);
+            _repository = new CategoryRepository(_dbContext.Object, _httpContext.Object, _session.Object);
         }
 
         [Fact]
         public void Get_ReturnListOfEntities()
         {
             // Arrange
-            var colours = CollectionHelpers.GetStandardColourList().AsQueryable();
-
-            MockHelpers.SetUpMockColourSet(_dbContext, colours);
+            var categories = CollectionHelpers.GetStandardCategoryList().AsQueryable();
+            MockHelpers.SetUpMockCategorySet(_dbContext, categories);
 
             // Act
             var result = _repository.Get();
@@ -47,16 +45,15 @@ namespace Example.Data.Tests.Repositories
         public void Get_ReturnIndividualEntity()
         {
             // Arrange
-            var colours = CollectionHelpers.GetStandardColourList().AsQueryable();
-
-            MockHelpers.SetUpMockColourSet(_dbContext, colours);
+            var categories = CollectionHelpers.GetStandardCategoryList().AsQueryable();
+            MockHelpers.SetUpMockCategorySet(_dbContext, categories);
 
             // Act
             var result = _repository.Get(1);
 
             // Assert
             Assert.True(result != null);
-            Assert.Equal(1, result.ColourId);
+            Assert.Equal(1, result.CategoryId);
             Assert.Equal("Red", result.Name);
         }
 
@@ -64,33 +61,33 @@ namespace Example.Data.Tests.Repositories
         public void Add_CheckReturnsEntityWhenNotDuplicate()
         {
             // Arrange
-            var entity = new Colour { ColourId = 1, Name = "Red" };
+            var entity = new Category { CategoryId = 1, Name = "Red" };
 
-            var colours = new List<Colour>
+            var categories = new List<Category>
             {
-                new Colour { ColourId = 2, Name = "Green" },
-                new Colour { ColourId = 3, Name = "Blue" },
+                new Category { CategoryId = 2, Name = "Green" },
+                new Category { CategoryId = 3, Name = "Blue" },
             }.AsQueryable();
 
-            MockHelpers.SetUpMockColourSet(_dbContext, colours, entity);
+            MockHelpers.SetUpMockCategorySet(_dbContext, categories, entity);
 
             // Act
             var result = _repository.Add(entity);
 
             // Assert
             Assert.True(result != null);
-            Assert.Equal(entity.ColourId, result.ColourId);
+            Assert.Equal(entity.CategoryId, result.CategoryId);
         }
 
         [Fact]
         public void Add_CheckReturnsNullWhenDuplicate()
         {
             // Arrange
-            var entity = new Colour { ColourId = 4, Name = "Red" };
+            var entity = new Category { CategoryId = 4, Name = "Red" };
 
-            var colours = CollectionHelpers.GetStandardColourList().AsQueryable();
+            var categories = CollectionHelpers.GetStandardCategoryList().AsQueryable();
 
-            MockHelpers.SetUpMockColourSet(_dbContext, colours, entity);
+            MockHelpers.SetUpMockCategorySet(_dbContext, categories, entity);
 
             // Act
             var result = _repository.Add(entity);
@@ -103,18 +100,18 @@ namespace Example.Data.Tests.Repositories
         public void Update_CheckReturnsEntityWhenNotDuplicate()
         {
             // Arrange
-            var entity = new Colour { ColourId = 1, Name = "Dark Red" };
+            var entity = new Category { CategoryId = 1, Name = "Dark Red" };
 
-            var colours = CollectionHelpers.GetStandardColourList().AsQueryable();
+            var categories = CollectionHelpers.GetStandardCategoryList().AsQueryable();
 
-            MockHelpers.SetUpMockColourSet(_dbContext, colours);
+            MockHelpers.SetUpMockCategorySet(_dbContext, categories);
 
             // Act
             var result = _repository.Update(entity);
 
             // Assert
             Assert.False(result == null);
-            Assert.Equal(entity.ColourId, result.ColourId);
+            Assert.Equal(entity.CategoryId, result.CategoryId);
             Assert.Equal(entity.Name, result.Name);
         }
 
@@ -122,11 +119,11 @@ namespace Example.Data.Tests.Repositories
         public void Update_CheckReturnsNullWhenDuplicate()
         {
             // Arrange
-            var entity = new Colour { ColourId = 1, Name = "Blue" };
+            var entity = new Category { CategoryId = 1, Name = "Blue" };
 
-            var colours = CollectionHelpers.GetStandardColourList().AsQueryable();
+            var categories = CollectionHelpers.GetStandardCategoryList().AsQueryable();
 
-            MockHelpers.SetUpMockColourSet(_dbContext, colours);
+            MockHelpers.SetUpMockCategorySet(_dbContext, categories);
 
             // Act
             var result = _repository.Add(entity);
@@ -139,15 +136,15 @@ namespace Example.Data.Tests.Repositories
         public void Remove_CheckReturnsTrueWhenNotInUse()
         {
             // Arrange
-            var entity = new Colour { ColourId = 1, Name = "Red" };
+            var entity = new Category { CategoryId = 1, Name = "Red" };
 
-            var colours = CollectionHelpers.GetStandardColourList().AsQueryable();
+            var categories = CollectionHelpers.GetStandardCategoryList().AsQueryable();
 
-            MockHelpers.SetUpMockColourSet(_dbContext, colours);
+            MockHelpers.SetUpMockCategorySet(_dbContext, categories);
 
             var stuff = new List<Stuff>
             {
-                new Stuff { StuffId = 1, One = "One", ColourId = 2, Categories = new List<Category> { new Category { CategoryId = 2, Name = "Red" } } },
+                new Stuff { StuffId = 1, One = "One", ColourId = 1, Categories = new List<Category> { new Category { CategoryId = 2, Name = "Green" } } },
                 new Stuff { StuffId = 2, One = "Two", ColourId = 2, Categories = new List<Category> { new Category { CategoryId = 2, Name = "Green" } } },
                 new Stuff { StuffId = 3, One = "Three", ColourId = 3, Categories = new List<Category> { new Category { CategoryId = 3, Name = "Blue" } } }
             }.AsQueryable();
@@ -165,11 +162,11 @@ namespace Example.Data.Tests.Repositories
         public void Remove_CheckReturnsFalseWhenInUse()
         {
             // Arrange
-            var entity = new Colour { ColourId = 1, Name = "Red" };
+            var entity = new Category { CategoryId = 1, Name = "Red" };
 
-            var colours = CollectionHelpers.GetStandardColourList().AsQueryable();
+            var categories = CollectionHelpers.GetStandardCategoryList().AsQueryable();
 
-            MockHelpers.SetUpMockColourSet(_dbContext, colours);
+            MockHelpers.SetUpMockCategorySet(_dbContext, categories);
 
             var stuff = CollectionHelpers.GetStandardStuffList().AsQueryable();
 
