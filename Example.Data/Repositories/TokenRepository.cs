@@ -11,7 +11,8 @@ namespace Example.Data.Repositories
 {
     public class TokenRepository : BaseRepository<Token>, ITokenRepository
     {
-        public TokenRepository(HttpContextBase httpContext, Session session) : base(httpContext, session)
+        public TokenRepository(ExampleContext dbContext, HttpContextBase httpContext, Session session)
+            : base(dbContext, httpContext, session)
         {
 
         }
@@ -19,14 +20,11 @@ namespace Example.Data.Repositories
         public Token CheckTokenIsValid(string guid, bool isPublic)
         {
             Token token = null;
-            using (var dbContext = new ExampleContext())
+            token = _dbContext.TokenSet.Where(t => t.Guid.ToString() == guid).FirstOrDefault();
+            if (token != null && (isPublic || !token.IsPublic))
             {
-                token = dbContext.TokenSet.Where(t => t.Guid.ToString() == guid).FirstOrDefault();
-                if (token != null && (isPublic || !token.IsPublic))
-                {
-                    token.LastAccessed = DateTime.Now;
-                    dbContext.SaveChanges();
-                }
+                token.LastAccessed = DateTime.Now;
+                _dbContext.SaveChanges();
             }
 
             return token;

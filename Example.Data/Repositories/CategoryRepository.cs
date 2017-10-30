@@ -1,16 +1,17 @@
-﻿using Example.Business.Models.Entities;
-using Example.Data.Interfaces;
-using System.Linq;
-using System.Collections.Generic;
+﻿using Example.Business.Models.Dtos;
+using Example.Business.Models.Entities;
 using Example.Data.Context;
+using Example.Data.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
-using Example.Business.Models.Dtos;
 
 namespace Example.Data.Repositories
 {
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
-        public CategoryRepository(HttpContextBase httpContext, Session session) : base(httpContext, session)
+        public CategoryRepository(ExampleContext dbContext, HttpContextBase httpContext, Session session)
+                : base(dbContext, httpContext, session)
         {
 
         }

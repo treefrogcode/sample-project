@@ -1,14 +1,16 @@
-using Example.Data.Repositories;
-using Example.Data.Interfaces;
-using Microsoft.Practices.Unity;
-using System.Web.Http;
-using Unity.WebApi;
+using Example.Business.API.Managers;
 using Example.Business.Logic.Interfaces;
 using Example.Business.Logic.Managers;
-using System.Web;
 using Example.Business.Models.Dtos;
+using Example.Data.Context;
+using Example.Data.Interfaces;
+using Example.Data.Repositories;
+using Microsoft.Practices.Unity;
 using System.Collections.Generic;
-using Example.Business.API.Managers;
+using System.Data.Entity;
+using System.Web;
+using System.Web.Http;
+using Unity.WebApi;
 
 namespace Example.Business.API
 {
@@ -21,12 +23,14 @@ namespace Example.Business.API
             // register all your components with the container here
             // it is NOT necessary to register your controllers
 
+            container.RegisterType<DbContext, ExampleContext>(new PerRequestLifetimeManager());
+
             container.RegisterType<HttpContextBase>(new InjectionFactory(c => new HttpContextWrapper(HttpContext.Current)));
 
             var newSession = new Session { Values = new Dictionary<string, string>() };
             container.RegisterInstance(typeof(Session), newSession, new PerRequestLifetimeManager());
 
-            // if repository for an owned entity, make per request lifetime
+            // if repository for an owned entity, make per request lifetime (as results dependent on http headers)
             container.RegisterType<IStuffRepository, StuffRepository>(new PerRequestLifetimeManager());
 
             // if repository not for an owned entity, can be a singleton

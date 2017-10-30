@@ -12,10 +12,10 @@ namespace Example.Data.Context
             Database.SetInitializer<ExampleContext>(null);
         }
 
-        public DbSet<Stuff> StuffSet { get; set; }
-        public DbSet<Colour> ColourSet { get; set; }
-        public DbSet<Category> CategorySet { get; set; }
-        public DbSet<Token> TokenSet { get; set; }
+        public virtual DbSet<Stuff> StuffSet { get; set; }
+        public virtual DbSet<Colour> ColourSet { get; set; }
+        public virtual DbSet<Category> CategorySet { get; set; }
+        public virtual DbSet<Token> TokenSet { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

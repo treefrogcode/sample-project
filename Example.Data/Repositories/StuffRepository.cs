@@ -1,29 +1,27 @@
-﻿using Example.Business.Models.Entities;
-using Example.Data.Interfaces;
-using System.Linq;
-using System.Collections.Generic;
+﻿using Example.Business.Models.Dtos;
+using Example.Business.Models.Entities;
 using Example.Data.Context;
+using Example.Data.Interfaces;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Web;
-using Example.Business.Models.Dtos;
 
 namespace Example.Data.Repositories
 {
     public class StuffRepository : BaseRepository<Stuff>, IStuffRepository
     {
-        public StuffRepository(HttpContextBase httpContext, Session session) : base(httpContext, session)
+        public StuffRepository(ExampleContext dbContext, HttpContextBase httpContext, Session session)
+            : base(dbContext, httpContext, session)
         {
 
         }
 
         public Stuff GetByOne(string one)
         {
-            using (ExampleContext entityContext = new ExampleContext())
-            {
-                return (from a in entityContext.StuffSet
-                        where a.One == one
-                        select a).FirstOrDefault();
-            }
+            return (from a in _dbContext.StuffSet
+                    where a.One == one
+                    select a).FirstOrDefault();
         }
 
         protected override Stuff AddEntity(ExampleContext entityContext, Stuff entity)
